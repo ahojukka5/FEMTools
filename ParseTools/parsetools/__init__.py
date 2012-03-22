@@ -6,6 +6,7 @@ import optparse
 import meta
 
 from jukka import *
+from joona import *
 
 def main(prog_args):
     parser = optparse.OptionParser(version=meta.__version__)
