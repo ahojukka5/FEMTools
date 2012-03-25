@@ -1,0 +1,8 @@
+include README
+include LICENSE
+include INSTALL
+include CHANGES
+recursive-include examples *.py
+graft doc/html
+graft teefem/data
+include doc/TeeFEM-TeekkariFEM.pdf

@@ -1,0 +1,1530 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to TeeFEM’s documentation! &mdash; TeeFEM - Teekkari FEM v0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="TeeFEM - Teekkari FEM v0.1.0 documentation" href="#" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li><a href="#">TeeFEM - Teekkari FEM v0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome-to-teefem-s-documentation">
+<h1>Welcome to TeeFEM&#8217;s documentation!<a class="headerlink" href="#welcome-to-teefem-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="module-teefem.models.mindlin">
+<h1>Indices and tables<a class="headerlink" href="#module-teefem.models.mindlin" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference external" href="modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference external" href="search.html"><em>Search Page</em></a></li>
+</ul>
+<p>Created on Wed Mar 07 23:12:23 2012</p>
+<p>&#64;author: Jukka Aho</p>
+<p>Mesh routines</p>
+<dl class="class">
+<dt id="teefem.geom.Mesh">
+<em class="property">class </em><tt class="descclassname">teefem.geom.</tt><tt class="descname">Mesh</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></p>
+<p>Mesh class. Reads file formats: Gmsh .msh, Salome .med, Aster .mail</p>
+<dl class="method">
+<dt id="teefem.geom.Mesh.assign_material">
+<tt class="descname">assign_material</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#teefem.geom.Mesh.assign_material" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.geom.Mesh.create_node_groups">
+<tt class="descname">create_node_groups</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.geom.Mesh.create_node_groups" title="Permalink to this definition">¶</a></dt>
+<dd>Create node groups from element groups</dd></dl>
+
+<dl class="method">
+<dt id="teefem.geom.Mesh.find_group_ma">
+<tt class="descname">find_group_ma</tt><big>(</big><em>gma</em><big>)</big><a class="headerlink" href="#teefem.geom.Mesh.find_group_ma" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.geom.Mesh.find_group_no">
+<tt class="descname">find_group_no</tt><big>(</big><em>gno</em><big>)</big><a class="headerlink" href="#teefem.geom.Mesh.find_group_no" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.geom.Mesh.status">
+<tt class="descname">status</tt><big>(</big><em>fulloutput=False</em><big>)</big><a class="headerlink" href="#teefem.geom.Mesh.status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.geom.Net">
+<em class="property">class </em><tt class="descclassname">teefem.geom.</tt><tt class="descname">Net</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Net" title="Permalink to this definition">¶</a></dt>
+<dd>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></dd></dl>
+
+<dl class="class">
+<dt id="teefem.geom.Net1D">
+<em class="property">class </em><tt class="descclassname">teefem.geom.</tt><tt class="descname">Net1D</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Net1D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.geom.Net" class="reference internal" href="#teefem.geom.Net"><tt class="xref docutils literal"><span class="pre">teefem.geom.Net</span></tt></a></p>
+<p>1d shapes</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.geom.Net2D">
+<em class="property">class </em><tt class="descclassname">teefem.geom.</tt><tt class="descname">Net2D</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Net2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.geom.Net" class="reference internal" href="#teefem.geom.Net"><tt class="xref docutils literal"><span class="pre">teefem.geom.Net</span></tt></a></p>
+<p>2d shapes</p>
+<dl class="method">
+<dt id="teefem.geom.Net2D.J">
+<tt class="descname">J</tt><big>(</big><em>*ke</em><big>)</big><a class="headerlink" href="#teefem.geom.Net2D.J" title="Permalink to this definition">¶</a></dt>
+<dd>2d Jacobian matrix</dd></dl>
+
+<dl class="method">
+<dt id="teefem.geom.Net2D.detJ">
+<tt class="descname">detJ</tt><big>(</big><em>*ke</em><big>)</big><a class="headerlink" href="#teefem.geom.Net2D.detJ" title="Permalink to this definition">¶</a></dt>
+<dd>Jacobian determinant</dd></dl>
+
+<dl class="method">
+<dt id="teefem.geom.Net2D.invJ">
+<tt class="descname">invJ</tt><big>(</big><em>*ke</em><big>)</big><a class="headerlink" href="#teefem.geom.Net2D.invJ" title="Permalink to this definition">¶</a></dt>
+<dd>Returns inverse Jacobian matrix</dd></dl>
+
+<dl class="method">
+<dt id="teefem.geom.Net2D.plot">
+<tt class="descname">plot</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Net2D.plot" title="Permalink to this definition">¶</a></dt>
+<dd>Plot geometry</dd></dl>
+
+<dl class="method">
+<dt id="teefem.geom.Net2D.plot3d">
+<tt class="descname">plot3d</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Net2D.plot3d" title="Permalink to this definition">¶</a></dt>
+<dd>Plot geometry with mplot3d</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.geom.Node">
+<em class="property">class </em><tt class="descclassname">teefem.geom.</tt><tt class="descname">Node</tt><big>(</big><em>x=0</em>, <em>y=0</em>, <em>z=0</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></p>
+<p>Node object</p>
+<dl class="docutils">
+<dt>INPUT:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">x</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">y</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">z</span></tt></li>
+</ul>
+</dd>
+<dt>OUTPUT:</dt>
+<dd><ul class="first last simple">
+<li>Node object</li>
+</ul>
+</dd>
+</dl>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">n</span>
+<span class="go">Node : (1.00,2.00,3.00)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="teefem.geom.Node.assign_boundary_condition">
+<tt class="descname">assign_boundary_condition</tt><big>(</big><em>bc</em><big>)</big><a class="headerlink" href="#teefem.geom.Node.assign_boundary_condition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.geom.Node.hasbc">
+<tt class="descname">hasbc</tt><big>(</big><em>dof</em><big>)</big><a class="headerlink" href="#teefem.geom.Node.hasbc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.geom.Node.hasload">
+<tt class="descname">hasload</tt><big>(</big><em>dof</em><big>)</big><a class="headerlink" href="#teefem.geom.Node.hasload" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.geom.Node.status">
+<tt class="descname">status</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.geom.Node.status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.geom.Node.update_boundary_conditions">
+<tt class="descname">update_boundary_conditions</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.geom.Node.update_boundary_conditions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.geom.Node.update_field">
+<tt class="descname">update_field</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Node.update_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.geom.Node.valbc">
+<tt class="descname">valbc</tt><big>(</big><em>dof</em><big>)</big><a class="headerlink" href="#teefem.geom.Node.valbc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.geom.Node.valload">
+<tt class="descname">valload</tt><big>(</big><em>dof</em><big>)</big><a class="headerlink" href="#teefem.geom.Node.valload" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.geom.Poi1">
+<em class="property">class </em><tt class="descclassname">teefem.geom.</tt><tt class="descname">Poi1</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Poi1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.geom.Net1D" class="reference internal" href="#teefem.geom.Net1D"><tt class="xref docutils literal"><span class="pre">teefem.geom.Net1D</span></tt></a></p>
+<p>1-node point.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.geom.Quad4">
+<em class="property">class </em><tt class="descclassname">teefem.geom.</tt><tt class="descname">Quad4</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Quad4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.geom.Net2D" class="reference internal" href="#teefem.geom.Net2D"><tt class="xref docutils literal"><span class="pre">teefem.geom.Net2D</span></tt></a></p>
+<p>4-node quadrangle shape</p>
+<img alt="_images/quad4.png" src="_images/quad4.png" />
+<p>SHAPE FUNCTION:</p>
+<p>INPUT:</p>
+<p>OUTPUT:</p>
+<p>EXAMPLES:</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.geom.Quad8">
+<em class="property">class </em><tt class="descclassname">teefem.geom.</tt><tt class="descname">Quad8</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Quad8" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.geom.Net2D" class="reference internal" href="#teefem.geom.Net2D"><tt class="xref docutils literal"><span class="pre">teefem.geom.Net2D</span></tt></a></p>
+<p>8-node second order quadrangle (4 nodes associated with the vertices and 4 with the edges).</p>
+<dl class="method">
+<dt id="teefem.geom.Quad8.plot">
+<tt class="descname">plot</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.geom.Quad8.plot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.geom.Quad9">
+<em class="property">class </em><tt class="descclassname">teefem.geom.</tt><tt class="descname">Quad9</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Quad9" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.geom.Net2D" class="reference internal" href="#teefem.geom.Net2D"><tt class="xref docutils literal"><span class="pre">teefem.geom.Net2D</span></tt></a></p>
+<p>9-node second order quadrangle (4 nodes associated with the vertices, 4 with the edges and 1 with the face).</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.geom.Seg2">
+<em class="property">class </em><tt class="descclassname">teefem.geom.</tt><tt class="descname">Seg2</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Seg2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.geom.Net1D" class="reference internal" href="#teefem.geom.Net1D"><tt class="xref docutils literal"><span class="pre">teefem.geom.Net1D</span></tt></a></p>
+<p>2-node line.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.geom.Seg3">
+<em class="property">class </em><tt class="descclassname">teefem.geom.</tt><tt class="descname">Seg3</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Seg3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.geom.Net1D" class="reference internal" href="#teefem.geom.Net1D"><tt class="xref docutils literal"><span class="pre">teefem.geom.Net1D</span></tt></a></p>
+<p>3-node second order line (2 nodes associated with the vertices and 1 with the edge).</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.geom.Tria3">
+<em class="property">class </em><tt class="descclassname">teefem.geom.</tt><tt class="descname">Tria3</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Tria3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.geom.Net2D" class="reference internal" href="#teefem.geom.Net2D"><tt class="xref docutils literal"><span class="pre">teefem.geom.Net2D</span></tt></a></p>
+<dl class="docutils">
+<dt>3-node triangle. </dt>
+<dd><img alt="_images/tria3.png" class="first last" src="_images/tria3.png" />
+</dd>
+</dl>
+<p>SHAPE FUNCTIONS:</p>
+<p>INPUT:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">name</span></tt> - Name of shape</li>
+<li><tt class="docutils literal"><span class="pre">[nodes]</span></tt> - List of nodes (len(nodes)==3)</li>
+</ul>
+<p>OUTPUT:</p>
+<ul class="simple">
+<li>Tria3 object</li>
+</ul>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tr3</span> <span class="o">=</span> <span class="n">Tria3</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;tr3&#39;</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.geom.Tria6">
+<em class="property">class </em><tt class="descclassname">teefem.geom.</tt><tt class="descname">Tria6</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.Tria6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.geom.Net2D" class="reference internal" href="#teefem.geom.Net2D"><tt class="xref docutils literal"><span class="pre">teefem.geom.Net2D</span></tt></a></p>
+<p>6-node second order triangle (3 nodes associated with the vertices and 3 with the edges.</p>
+<img alt="_images/tria6.png" src="_images/tria6.png" />
+<p>SHAPE FUNCTIONS:</p>
+<p>INPUT:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">name</span></tt> - Name of shape</li>
+<li><tt class="docutils literal"><span class="pre">[nodes]</span></tt> - List of nodes (len(nodes)==6)</li>
+</ul>
+<p>OUTPUT:</p>
+<ul class="simple">
+<li>Tria6 object</li>
+</ul>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n4</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n5</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n6</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tr6</span> <span class="o">=</span> <span class="n">Tria6</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;tr6&#39;</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">n4</span><span class="p">,</span> <span class="n">n5</span><span class="p">,</span> <span class="n">n6</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="teefem.geom.mesh">
+<tt class="descclassname">teefem.geom.</tt><tt class="descname">mesh</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.geom.mesh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="teefem.geom.parsemail">
+<tt class="descclassname">teefem.geom.</tt><tt class="descname">parsemail</tt><big>(</big><em>fh</em><big>)</big><a class="headerlink" href="#teefem.geom.parsemail" title="Permalink to this definition">¶</a></dt>
+<dd>Parse Aster mail format</dd></dl>
+
+<dl class="function">
+<dt id="teefem.geom.parsemed">
+<tt class="descclassname">teefem.geom.</tt><tt class="descname">parsemed</tt><big>(</big><em>fh</em><big>)</big><a class="headerlink" href="#teefem.geom.parsemed" title="Permalink to this definition">¶</a></dt>
+<dd>Read Salome .med file format</dd></dl>
+
+<dl class="function">
+<dt id="teefem.geom.parsemsh">
+<tt class="descclassname">teefem.geom.</tt><tt class="descname">parsemsh</tt><big>(</big><em>fh</em><big>)</big><a class="headerlink" href="#teefem.geom.parsemsh" title="Permalink to this definition">¶</a></dt>
+<dd>Read Gmsh .msh file format</dd></dl>
+
+<p>Created on Tue Mar 20 10:38:43 2012</p>
+<p>&#64;author: Jukka</p>
+<dl class="class">
+<dt id="teefem.boundary_conditions.BoundaryCondition">
+<em class="property">class </em><tt class="descclassname">teefem.boundary_conditions.</tt><tt class="descname">BoundaryCondition</tt><a class="headerlink" href="#teefem.boundary_conditions.BoundaryCondition" title="Permalink to this definition">¶</a></dt>
+<dd>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></dd></dl>
+
+<dl class="class">
+<dt id="teefem.boundary_conditions.DirichletBoundaryCondition">
+<em class="property">class </em><tt class="descclassname">teefem.boundary_conditions.</tt><tt class="descname">DirichletBoundaryCondition</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.boundary_conditions.DirichletBoundaryCondition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.boundary_conditions.BoundaryCondition" class="reference internal" href="#teefem.boundary_conditions.BoundaryCondition"><tt class="xref docutils literal"><span class="pre">teefem.boundary_conditions.BoundaryCondition</span></tt></a></p>
+<dl class="method">
+<dt id="teefem.boundary_conditions.DirichletBoundaryCondition.exist">
+<tt class="descname">exist</tt><big>(</big><em>dof</em><big>)</big><a class="headerlink" href="#teefem.boundary_conditions.DirichletBoundaryCondition.exist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.boundary_conditions.DirichletBoundaryCondition.val">
+<tt class="descname">val</tt><big>(</big><em>dof</em><big>)</big><a class="headerlink" href="#teefem.boundary_conditions.DirichletBoundaryCondition.val" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.boundary_conditions.NodalForce">
+<em class="property">class </em><tt class="descclassname">teefem.boundary_conditions.</tt><tt class="descname">NodalForce</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.boundary_conditions.NodalForce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.boundary_conditions.BoundaryCondition" class="reference internal" href="#teefem.boundary_conditions.BoundaryCondition"><tt class="xref docutils literal"><span class="pre">teefem.boundary_conditions.BoundaryCondition</span></tt></a></p>
+<dl class="method">
+<dt id="teefem.boundary_conditions.NodalForce.exist">
+<tt class="descname">exist</tt><big>(</big><em>dof</em><big>)</big><a class="headerlink" href="#teefem.boundary_conditions.NodalForce.exist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.boundary_conditions.NodalForce.val">
+<tt class="descname">val</tt><big>(</big><em>dof</em><big>)</big><a class="headerlink" href="#teefem.boundary_conditions.NodalForce.val" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.boundary_conditions.PressureBoundaryCondition">
+<em class="property">class </em><tt class="descclassname">teefem.boundary_conditions.</tt><tt class="descname">PressureBoundaryCondition</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.boundary_conditions.PressureBoundaryCondition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.boundary_conditions.BoundaryCondition" class="reference internal" href="#teefem.boundary_conditions.BoundaryCondition"><tt class="xref docutils literal"><span class="pre">teefem.boundary_conditions.BoundaryCondition</span></tt></a></p>
+<p>INPUT KEYWORDS</p>
+<blockquote>
+pressure : function
+f.e. pressure = lambda k,e: -100e3</blockquote>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.boundary_conditions.dirichlet_bc">
+<tt class="descclassname">teefem.boundary_conditions.</tt><tt class="descname">dirichlet_bc</tt><a class="headerlink" href="#teefem.boundary_conditions.dirichlet_bc" title="Permalink to this definition">¶</a></dt>
+<dd>alias of <a title="teefem.boundary_conditions.DirichletBoundaryCondition" class="reference internal" href="#teefem.boundary_conditions.DirichletBoundaryCondition"><tt class="xref docutils literal"><span class="pre">DirichletBoundaryCondition</span></tt></a></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.boundary_conditions.nodal_force">
+<tt class="descclassname">teefem.boundary_conditions.</tt><tt class="descname">nodal_force</tt><a class="headerlink" href="#teefem.boundary_conditions.nodal_force" title="Permalink to this definition">¶</a></dt>
+<dd>alias of <a title="teefem.boundary_conditions.NodalForce" class="reference internal" href="#teefem.boundary_conditions.NodalForce"><tt class="xref docutils literal"><span class="pre">NodalForce</span></tt></a></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.boundary_conditions.pressure_bc">
+<tt class="descclassname">teefem.boundary_conditions.</tt><tt class="descname">pressure_bc</tt><a class="headerlink" href="#teefem.boundary_conditions.pressure_bc" title="Permalink to this definition">¶</a></dt>
+<dd>alias of <a title="teefem.boundary_conditions.PressureBoundaryCondition" class="reference internal" href="#teefem.boundary_conditions.PressureBoundaryCondition"><tt class="xref docutils literal"><span class="pre">PressureBoundaryCondition</span></tt></a></dd></dl>
+
+<dl class="function">
+<dt id="teefem.boundary_conditions.test1">
+<tt class="descclassname">teefem.boundary_conditions.</tt><tt class="descname">test1</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.boundary_conditions.test1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Created on Wed Mar 14 14:20:39 2012</p>
+<p>&#64;author: Jukka Aho</p>
+<p>Cache</p>
+<dl class="attribute">
+<dt id="teefem.cache.Cache">
+<tt class="descclassname">teefem.cache.</tt><tt class="descname">Cache</tt><a class="headerlink" href="#teefem.cache.Cache" title="Permalink to this definition">¶</a></dt>
+<dd>Decorator that caches a function&#8217;s return value each time it is called.
+If called later with the same arguments, the cached value is returned, and
+not re-evaluated.</dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.cache.cache">
+<tt class="descclassname">teefem.cache.</tt><tt class="descname">cache</tt><a class="headerlink" href="#teefem.cache.cache" title="Permalink to this definition">¶</a></dt>
+<dd>Decorator that caches a function&#8217;s return value each time it is called.
+If called later with the same arguments, the cached value is returned, and
+not re-evaluated.</dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.cache.fibonacci">
+<tt class="descclassname">teefem.cache.</tt><tt class="descname">fibonacci</tt><a class="headerlink" href="#teefem.cache.fibonacci" title="Permalink to this definition">¶</a></dt>
+<dd>Decorator that caches a function&#8217;s return value each time it is called.
+If called later with the same arguments, the cached value is returned, and
+not re-evaluated.</dd></dl>
+
+<p>Created on Sun Mar 11 02:04:59 2012</p>
+<p>&#64;author: Jukka</p>
+<dl class="class">
+<dt id="teefem.common.IJV">
+<em class="property">class </em><tt class="descclassname">teefem.common.</tt><tt class="descname">IJV</tt><a class="headerlink" href="#teefem.common.IJV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></p>
+<p>Creates IJV-arrays and converts to COO sparse matrix</p>
+<dl class="docutils">
+<dt>INPUT:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">dim</span></tt> - lenght of I,J,V lists</li>
+</ul>
+</dd>
+</dl>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">k</span> <span class="o">=</span> <span class="mf">210e9</span><span class="o">*</span><span class="mf">10e-4</span><span class="o">/</span><span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ijv</span> <span class="o">=</span> <span class="n">IJV</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ijv</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ijv</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ijv</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="n">k</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ijv</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="n">k</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">ijv</span><span class="o">.</span><span class="n">tocoo</span><span class="p">()</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="go">[[ 70000000. -70000000.]</span>
+<span class="go"> [-70000000.  70000000.]]</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="teefem.common.IJV.add">
+<tt class="descname">add</tt><big>(</big><em>i</em>, <em>j</em>, <em>v</em><big>)</big><a class="headerlink" href="#teefem.common.IJV.add" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.common.IJV.tocoo">
+<tt class="descname">tocoo</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.common.IJV.tocoo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="teefem.common.anglxy">
+<tt class="descclassname">teefem.common.</tt><tt class="descname">anglxy</tt><big>(</big><em>n1</em>, <em>n2</em><big>)</big><a class="headerlink" href="#teefem.common.anglxy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="teefem.common.arrtostr">
+<tt class="descclassname">teefem.common.</tt><tt class="descname">arrtostr</tt><big>(</big><em>arr</em><big>)</big><a class="headerlink" href="#teefem.common.arrtostr" title="Permalink to this definition">¶</a></dt>
+<dd>Converts list of integers to string</dd></dl>
+
+<dl class="function">
+<dt id="teefem.common.dist">
+<tt class="descclassname">teefem.common.</tt><tt class="descname">dist</tt><big>(</big><em>n1</em>, <em>n2</em><big>)</big><a class="headerlink" href="#teefem.common.dist" title="Permalink to this definition">¶</a></dt>
+<dd>Returns distance between two nodes</dd></dl>
+
+<dl class="function">
+<dt id="teefem.common.test1">
+<tt class="descclassname">teefem.common.</tt><tt class="descname">test1</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.common.test1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Created on Tue Mar 20 07:47:37 2012</p>
+<p>DeprecationWarning decorator</p>
+<dl class="function">
+<dt id="teefem.deprecation.deprecated">
+<tt class="descclassname">teefem.deprecation.</tt><tt class="descname">deprecated</tt><big>(</big><em>func</em><big>)</big><a class="headerlink" href="#teefem.deprecation.deprecated" title="Permalink to this definition">¶</a></dt>
+<dd>This is a decorator which can be used to mark functions
+as deprecated. It will result in a warning being emitted
+when the function is used.</dd></dl>
+
+<p>Created on Thu Mar 08 00:03:31 2012</p>
+<p>&#64;author: Jukka Aho</p>
+<div class="section" id="elements-py-finite-elements">
+<h2>### Elements.py - FINITE ELEMENTS ###<a class="headerlink" href="#elements-py-finite-elements" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teefem.elements.Element">
+<em class="property">class </em><tt class="descclassname">teefem.elements.</tt><tt class="descname">Element</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.elements.Element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></p>
+<p>General finite element class</p>
+<dl class="attribute">
+<dt id="teefem.elements.Element.J">
+<tt class="descname">J</tt><a class="headerlink" href="#teefem.elements.Element.J" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.elements.Element.area">
+<tt class="descname">area</tt><a class="headerlink" href="#teefem.elements.Element.area" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.elements.Element.invJ">
+<tt class="descname">invJ</tt><a class="headerlink" href="#teefem.elements.Element.invJ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.elements.Element.status">
+<tt class="descname">status</tt><a class="headerlink" href="#teefem.elements.Element.status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.elements.Element.update">
+<tt class="descname">update</tt><big>(</big><em>U</em><big>)</big><a class="headerlink" href="#teefem.elements.Element.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.elements.Element1D">
+<em class="property">class </em><tt class="descclassname">teefem.elements.</tt><tt class="descname">Element1D</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.elements.Element1D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.elements.Element" class="reference internal" href="#teefem.elements.Element"><tt class="xref docutils literal"><span class="pre">teefem.elements.Element</span></tt></a></p>
+<p>General functions for 1D finite elements</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.elements.Element2D">
+<em class="property">class </em><tt class="descclassname">teefem.elements.</tt><tt class="descname">Element2D</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.elements.Element2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.elements.Element" class="reference internal" href="#teefem.elements.Element"><tt class="xref docutils literal"><span class="pre">teefem.elements.Element</span></tt></a></p>
+<p>General 2D finite element class</p>
+<dl class="method">
+<dt id="teefem.elements.Element2D.plot">
+<tt class="descname">plot</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.elements.Element2D.plot" title="Permalink to this definition">¶</a></dt>
+<dd>Plots geometry and Gauss points</dd></dl>
+
+</dd></dl>
+
+</div>
+<p>Created on Sun Feb 12 16:11:41 2012</p>
+<p>&#64;author: Jukka Aho</p>
+<p>Created on Sun Feb 12 16:45:50 2012</p>
+<p>&#64;author: Jukka Aho</p>
+<div class="section" id="materials-py-material-models">
+<h2>### materials.py - MATERIAL MODELS ###<a class="headerlink" href="#materials-py-material-models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teefem.materials.Elastic">
+<em class="property">class </em><tt class="descclassname">teefem.materials.</tt><tt class="descname">Elastic</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.materials.Elastic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></p>
+<p>Linear elastic material model</p>
+<p>INPUT:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">E</span></tt> - Modulus of elasticity</li>
+<li><tt class="docutils literal"><span class="pre">nu</span></tt> - Poisson&#8217;s ratio</li>
+</ul>
+<p>OUTPUT:</p>
+<ul class="simple">
+<li>Material object</li>
+</ul>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="c"># doctest: +SKIP</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span> <span class="o">=</span> <span class="n">Elastic</span><span class="p">(</span><span class="n">E</span> <span class="o">=</span> <span class="mf">210e9</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mesh</span><span class="o">.</span><span class="n">assign_material</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span> <span class="c"># doctest: +SKIP</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.materials.elastic">
+<tt class="descclassname">teefem.materials.</tt><tt class="descname">elastic</tt><a class="headerlink" href="#teefem.materials.elastic" title="Permalink to this definition">¶</a></dt>
+<dd>alias of <a title="teefem.materials.Elastic" class="reference internal" href="#teefem.materials.Elastic"><tt class="xref docutils literal"><span class="pre">Elastic</span></tt></a></dd></dl>
+
+</div>
+<p>Created on Tue Mar 20 17:32:59 2012</p>
+<p>&#64;author: Jukka Aho</p>
+<p>Mesh tools</p>
+<p>Erilaisia yksinkertaisia verkotustyökaluja joilla voi muodostaa perusverkkoja
+testitarkoituksiin.</p>
+<p>Mikään näistä ei toimi. Tästä voisi yrittää raapia kasaan jotakin toimivaa. Perusajatus
+olisi että esim.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">teefem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mesh1</span> <span class="o">=</span> <span class="n">teefem</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">unitcircle</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">mesh1</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="teefem.mesh.Trimesh">
+<em class="property">class </em><tt class="descclassname">teefem.mesh.</tt><tt class="descname">Trimesh</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="headerlink" href="#teefem.mesh.Trimesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">matplotlib.delaunay.triangulate.Triangulation</span></tt></p>
+<p>Kolmioverkkorutiini matplotlibin kirjastosta paranneltuna</p>
+<dl class="attribute">
+<dt id="teefem.mesh.Trimesh.average_edge_lenght">
+<tt class="descname">average_edge_lenght</tt><a class="headerlink" href="#teefem.mesh.Trimesh.average_edge_lenght" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.mesh.Trimesh.plot">
+<tt class="descname">plot</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.mesh.Trimesh.plot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.mesh.Trimesh.sgm">
+<tt class="descname">sgm</tt><big>(</big><em>fixedn</em><big>)</big><a class="headerlink" href="#teefem.mesh.Trimesh.sgm" title="Permalink to this definition">¶</a></dt>
+<dd>Ei toimi.</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="teefem.mesh.force_eq">
+<tt class="descclassname">teefem.mesh.</tt><tt class="descname">force_eq</tt><big>(</big><em>mesh</em>, <em>fd</em>, <em>fh</em>, <em>plot=True</em>, <em>filename='output/force_eq'</em><big>)</big><a class="headerlink" href="#teefem.mesh.force_eq" title="Permalink to this definition">¶</a></dt>
+<dd>Tasapainottaa pistejoukon voimatasapainolla käyttäen kolmiointia.</dd></dl>
+
+<dl class="function">
+<dt id="teefem.mesh.force_eq_test1">
+<tt class="descclassname">teefem.mesh.</tt><tt class="descname">force_eq_test1</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.mesh.force_eq_test1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="teefem.mesh.forcemoc">
+<tt class="descclassname">teefem.mesh.</tt><tt class="descname">forcemoc</tt><big>(</big><em>x0</em>, <em>y0</em>, <em>plot=True</em>, <em>filename='moc'</em><big>)</big><a class="headerlink" href="#teefem.mesh.forcemoc" title="Permalink to this definition">¶</a></dt>
+<dd>Tasapainottaa verkon voimatasapainolla.
+Tämä versio perustuu siihen että kaikki partikkelit vaikuttavat
+kaikkiin partikkeleihin. Tässä versiossa ei siis tarvitse kolmiointia
+tai muutakaan.</dd></dl>
+
+<dl class="function">
+<dt id="teefem.mesh.forcemoc_test1">
+<tt class="descclassname">teefem.mesh.</tt><tt class="descname">forcemoc_test1</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.mesh.forcemoc_test1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="teefem.mesh.refine">
+<tt class="descclassname">teefem.mesh.</tt><tt class="descname">refine</tt><big>(</big><em>mesh</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.mesh.refine" title="Permalink to this definition">¶</a></dt>
+<dd>Yksinkertainen refine looppi. Katkaistaan liian pitkät reunat keskeltä.</dd></dl>
+
+<dl class="function">
+<dt id="teefem.mesh.sgmtest">
+<tt class="descclassname">teefem.mesh.</tt><tt class="descname">sgmtest</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.mesh.sgmtest" title="Permalink to this definition">¶</a></dt>
+<dd>Testataan SGM rutiinia</dd></dl>
+
+<dl class="function">
+<dt id="teefem.mesh.test1">
+<tt class="descclassname">teefem.mesh.</tt><tt class="descname">test1</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.mesh.test1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="teefem.mesh.unitcircle">
+<tt class="descclassname">teefem.mesh.</tt><tt class="descname">unitcircle</tt><big>(</big><em>R=1</em>, <em>lc=1</em><big>)</big><a class="headerlink" href="#teefem.mesh.unitcircle" title="Permalink to this definition">¶</a></dt>
+<dd>Yksikköympyrä</dd></dl>
+
+<dl class="function">
+<dt id="teefem.mesh.unitcircle1">
+<tt class="descclassname">teefem.mesh.</tt><tt class="descname">unitcircle1</tt><big>(</big><em>R=1</em>, <em>lc=0.5</em><big>)</big><a class="headerlink" href="#teefem.mesh.unitcircle1" title="Permalink to this definition">¶</a></dt>
+<dd>Yksikköympyrä</dd></dl>
+
+<dl class="function">
+<dt id="teefem.mesh.unitcircle2">
+<tt class="descclassname">teefem.mesh.</tt><tt class="descname">unitcircle2</tt><big>(</big><em>R=1</em>, <em>lc=1.0</em><big>)</big><a class="headerlink" href="#teefem.mesh.unitcircle2" title="Permalink to this definition">¶</a></dt>
+<dd>Toinen versio yksikköympyrästä, alkujakauma kuten distmeshissä</dd></dl>
+
+<dl class="function">
+<dt id="teefem.mesh.unitinterval">
+<tt class="descclassname">teefem.mesh.</tt><tt class="descname">unitinterval</tt><big>(</big><em>a=0</em>, <em>b=1</em>, <em>lc=0.10000000000000001</em><big>)</big><a class="headerlink" href="#teefem.mesh.unitinterval" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="teefem.mesh.unitsquare">
+<tt class="descclassname">teefem.mesh.</tt><tt class="descname">unitsquare</tt><big>(</big><em>a=1</em>, <em>b=1</em>, <em>lc=0.20000000000000001</em><big>)</big><a class="headerlink" href="#teefem.mesh.unitsquare" title="Permalink to this definition">¶</a></dt>
+<dd>Suorakaiteen muotoinen alue</dd></dl>
+
+<dl class="function">
+<dt id="teefem.mesh.unitsquare2">
+<tt class="descclassname">teefem.mesh.</tt><tt class="descname">unitsquare2</tt><big>(</big><em>L=1</em>, <em>H=1</em><big>)</big><a class="headerlink" href="#teefem.mesh.unitsquare2" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<p>Suorakaiteen muotoinen yksinkertainen käsintehty verkotus</p>
+<p>P4&#8212;&#8212;&#8212;GA4&#8212;&#8212;&#8212;P3
+|                       |
+|                       |
+|     OM1               |
+|                       |
+|                       |</p>
+</blockquote>
+<dl class="docutils">
+<dt>GA1         P5          GA3</dt>
+<dd><div class="first line-block">
+<div class="line"><a href="#id1"><span class="problematic" id="id2">|</span></a></div>
+<div class="line"><a href="#id3"><span class="problematic" id="id4">|</span></a></div>
+<div class="line"><a href="#id5"><span class="problematic" id="id6">|</span></a></div>
+<div class="line"><a href="#id7"><span class="problematic" id="id8">|</span></a></div>
+<div class="line"><a href="#id9"><span class="problematic" id="id10">|</span></a></div>
+</div>
+<p class="last">P1&#8212;&#8212;&#8212;GA2&#8212;&#8212;&#8212;P2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Created on Sat Mar 24 02:27:29 2012</p>
+<p>&#64;author: Jukka</p>
+<p>Kaikenlaisia verkotukseen liittyviä kokeiluja</p>
+<dl class="function">
+<dt id="teefem.meshtests.arctan2">
+<tt class="descclassname">teefem.meshtests.</tt><tt class="descname">arctan2</tt><big>(</big><em>y</em>, <em>x</em><big>)</big><a class="headerlink" href="#teefem.meshtests.arctan2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="teefem.meshtests.dist">
+<tt class="descclassname">teefem.meshtests.</tt><tt class="descname">dist</tt><big>(</big><em>x1</em>, <em>x2</em><big>)</big><a class="headerlink" href="#teefem.meshtests.dist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="teefem.meshtests.onedmeshtest">
+<tt class="descclassname">teefem.meshtests.</tt><tt class="descname">onedmeshtest</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.meshtests.onedmeshtest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yksidimensioinen verkon tasapainotustesti</p>
+<p>Perustuu suuriin siirtymiin ja staattiseen analyysiin</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teefem.meshtests.onedmeshtest2">
+<tt class="descclassname">teefem.meshtests.</tt><tt class="descname">onedmeshtest2</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.meshtests.onedmeshtest2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yksidimensioinen verkon tasapainotustesti 
+mu&#8217;&#8217; + cu&#8217; + ku&#8217; = F</p>
+<p>x0|&#8212;x2&#8212;&#8212;<a href="#id11"><span class="problematic" id="id12">|</span></a>x1</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teefem.meshtests.onedmeshtest3">
+<tt class="descclassname">teefem.meshtests.</tt><tt class="descname">onedmeshtest3</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.meshtests.onedmeshtest3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yksidimensioinen verkon tasapainotustesti 
+mu&#8217;&#8217; + cu&#8217; + ku&#8217; = F</p>
+<p>x0|&#8212;x2&#8212;&#8212;<a href="#id13"><span class="problematic" id="id14">|</span></a>x1</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teefem.meshtests.onedmeshtest4">
+<tt class="descclassname">teefem.meshtests.</tt><tt class="descname">onedmeshtest4</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.meshtests.onedmeshtest4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yksidimensioinen verkon tasapainotustesti 
+mu&#8217;&#8217; + cu&#8217; + ku&#8217; = F</p>
+<p>x0|&#8212;x2&#8212;&#8212;<a href="#id15"><span class="problematic" id="id16">|</span></a>x1</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teefem.meshtests.onedmeshtest5">
+<tt class="descclassname">teefem.meshtests.</tt><tt class="descname">onedmeshtest5</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.meshtests.onedmeshtest5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yksidimensioinen verkon tasapainotustesti 
+mu&#8217;&#8217; + cu&#8217; + ku&#8217; = F</p>
+<p>x0|&#8212;&#8212;x1&#8212;&#8212;<a href="#id17"><span class="problematic" id="id18">|</span></a>x2</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teefem.meshtests.onedmeshtest6">
+<tt class="descclassname">teefem.meshtests.</tt><tt class="descname">onedmeshtest6</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.meshtests.onedmeshtest6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yksidimensioinen verkon tasapainotustesti 
+mu&#8217;&#8217; + cu&#8217; + ku&#8217; = F</p>
+<p>x0|&#8212;&#8212;x1&#8212;&#8212;<a href="#id19"><span class="problematic" id="id20">|</span></a>x2</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teefem.meshtests.onedmeshtest7">
+<tt class="descclassname">teefem.meshtests.</tt><tt class="descname">onedmeshtest7</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.meshtests.onedmeshtest7" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kaksidimensioinen verkon tasapainotustesti 
+mu&#8217;&#8217; + cu&#8217; + ku&#8217; = f</p>
+<p>kuva prujussa.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teefem.meshtests.trimeshtest">
+<tt class="descclassname">teefem.meshtests.</tt><tt class="descname">trimeshtest</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.meshtests.trimeshtest" title="Permalink to this definition">¶</a></dt>
+<dd>Kolmioverkon testausta</dd></dl>
+
+<p>Created on Tue Mar 20 11:10:29 2012</p>
+<p>Laattafunktioita</p>
+<p>&#64;author: Jukka</p>
+<dl class="class">
+<dt id="teefem.plate_functions.PlateCharacteristic">
+<em class="property">class </em><tt class="descclassname">teefem.plate_functions.</tt><tt class="descname">PlateCharacteristic</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.plate_functions.PlateCharacteristic" title="Permalink to this definition">¶</a></dt>
+<dd>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.plate_functions.platechar">
+<tt class="descclassname">teefem.plate_functions.</tt><tt class="descname">platechar</tt><a class="headerlink" href="#teefem.plate_functions.platechar" title="Permalink to this definition">¶</a></dt>
+<dd>alias of <a title="teefem.plate_functions.PlateCharacteristic" class="reference internal" href="#teefem.plate_functions.PlateCharacteristic"><tt class="xref docutils literal"><span class="pre">PlateCharacteristic</span></tt></a></dd></dl>
+
+<p>Created on Sun Mar 11 12:04:59 2012</p>
+<p>&#64;author: Jukka</p>
+<dl class="class">
+<dt id="teefem.models.common.Model">
+<em class="property">class </em><tt class="descclassname">teefem.models.common.</tt><tt class="descname">Model</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.common.Model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></p>
+<p>General mechanical model</p>
+<dl class="method">
+<dt id="teefem.models.common.Model.assemble_force_vector">
+<tt class="descname">assemble_force_vector</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.common.Model.assemble_force_vector" title="Permalink to this definition">¶</a></dt>
+<dd>Assemble force vector</dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.common.Model.assemble_stiffness_matrix">
+<tt class="descname">assemble_stiffness_matrix</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.common.Model.assemble_stiffness_matrix" title="Permalink to this definition">¶</a></dt>
+<dd>Assemble stiffness matrix</dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.common.Model.assign_bc">
+<tt class="descname">assign_bc</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#teefem.models.common.Model.assign_bc" title="Permalink to this definition">¶</a></dt>
+<dd>Assigns boundary conditions to elements / nodes</dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.common.Model.create_element_groups">
+<tt class="descname">create_element_groups</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.common.Model.create_element_groups" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.common.Model.create_node_groups">
+<tt class="descname">create_node_groups</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.common.Model.create_node_groups" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.common.Model.init">
+<tt class="descname">init</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.common.Model.init" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.common.Model.load_elements">
+<tt class="descname">load_elements</tt><a class="headerlink" href="#teefem.models.common.Model.load_elements" title="Permalink to this definition">¶</a></dt>
+<dd>Decorator that caches a function&#8217;s return value each time it is called.
+If called later with the same arguments, the cached value is returned, and
+not re-evaluated.</dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.common.Model.static_solve">
+<tt class="descname">static_solve</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.common.Model.static_solve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.common.Model.stiff_elements">
+<tt class="descname">stiff_elements</tt><a class="headerlink" href="#teefem.models.common.Model.stiff_elements" title="Permalink to this definition">¶</a></dt>
+<dd>Decorator that caches a function&#8217;s return value each time it is called.
+If called later with the same arguments, the cached value is returned, and
+not re-evaluated.</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.common.assign_bc">
+<tt class="descclassname">teefem.models.common.</tt><tt class="descname">assign_bc</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.common.assign_bc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.common.assign_char">
+<tt class="descclassname">teefem.models.common.</tt><tt class="descname">assign_char</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.common.assign_char" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.common.assign_material">
+<tt class="descclassname">teefem.models.common.</tt><tt class="descname">assign_material</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.common.assign_material" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>2d sauvamalli</p>
+<p>kesken.</p>
+<dl class="class">
+<dt id="teefem.models.bar2d.Bar2D">
+<em class="property">class </em><tt class="descclassname">teefem.models.bar2d.</tt><tt class="descname">Bar2D</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.bar2d.Bar2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></p>
+<p>Sauvaelementti</p>
+<dl class="method">
+<dt id="teefem.models.bar2d.Bar2D.B">
+<tt class="descname">B</tt><big>(</big><em>*ke</em><big>)</big><a class="headerlink" href="#teefem.models.bar2d.Bar2D.B" title="Permalink to this definition">¶</a></dt>
+<dd>Returns plane kinematic matrix B</dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.bar2d.Bar2D.assign_char">
+<tt class="descname">assign_char</tt><big>(</big><em>char</em><big>)</big><a class="headerlink" href="#teefem.models.bar2d.Bar2D.assign_char" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.bar2d.Bar2D.assign_material">
+<tt class="descname">assign_material</tt><big>(</big><em>mat</em><big>)</big><a class="headerlink" href="#teefem.models.bar2d.Bar2D.assign_material" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.bar2d.Bar2D.detJ">
+<tt class="descname">detJ</tt><a class="headerlink" href="#teefem.models.bar2d.Bar2D.detJ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.bar2d.Bar2D.stiffness_matrix">
+<tt class="descname">stiffness_matrix</tt><a class="headerlink" href="#teefem.models.bar2d.Bar2D.stiffness_matrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.bar2d.Bar2DModel">
+<em class="property">class </em><tt class="descclassname">teefem.models.bar2d.</tt><tt class="descname">Bar2DModel</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.bar2d.Bar2DModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.common.Model" class="reference internal" href="#teefem.models.common.Model"><tt class="xref docutils literal"><span class="pre">teefem.models.common.Model</span></tt></a></p>
+<p>Bar 2d model</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.bar2d.ex1">
+<tt class="descclassname">teefem.models.bar2d.</tt><tt class="descname">ex1</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.bar2d.ex1" title="Permalink to this definition">¶</a></dt>
+<dd>Ristikkorakenteen ratkaisu</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.c_plan.C_PLAN">
+<em class="property">class </em><tt class="descclassname">teefem.models.c_plan.</tt><tt class="descname">C_PLAN</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.c_plan.C_PLAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.common.Model" class="reference internal" href="#teefem.models.common.Model"><tt class="xref docutils literal"><span class="pre">teefem.models.common.Model</span></tt></a></p>
+<p>Plane stress modelisation</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.c_plan.MECPQU4">
+<em class="property">class </em><tt class="descclassname">teefem.models.c_plan.</tt><tt class="descname">MECPQU4</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.c_plan.MECPQU4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.c_plan.PlaneStressElement2D" class="reference internal" href="#teefem.models.c_plan.PlaneStressElement2D"><tt class="xref docutils literal"><span class="pre">teefem.models.c_plan.PlaneStressElement2D</span></tt></a></p>
+<p>Plane stress linear quadrangle finite element</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n4</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qu4</span> <span class="o">=</span> <span class="n">Quad4</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;MA1&#39;</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">n4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qu4</span><span class="o">.</span><span class="n">material</span> <span class="o">=</span> <span class="n">Elastic</span><span class="p">(</span><span class="n">E</span> <span class="o">=</span> <span class="mf">100e9</span><span class="p">,</span> <span class="n">nu</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma1</span> <span class="o">=</span> <span class="n">MECPQU4</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="n">qu4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s">&#39;img/MECPQU4.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/MECPQU4.png" src="_images/MECPQU4.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ma1emat</span> <span class="o">=</span> <span class="n">ma1</span><span class="o">.</span><span class="n">material_matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">ma1emat</span>
+<span class="go">[[  1.3e+11   6.7e+10   0.0e+00]</span>
+<span class="go"> [  6.7e+10   1.3e+11   0.0e+00]</span>
+<span class="go"> [  0.0e+00   0.0e+00   3.3e+10]]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ma1bmat</span> <span class="o">=</span> <span class="n">ma1</span><span class="o">.</span><span class="n">kinematic_matrix</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">ma1bmat</span>
+<span class="go">[[-0.1  0.   0.3  0.   0.1  0.  -0.3  0. ]</span>
+<span class="go"> [ 0.  -0.4  0.  -0.1  0.   0.4  0.   0.1]</span>
+<span class="go"> [-0.4 -0.1 -0.1  0.3  0.4  0.1  0.1 -0.3]]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ma1kmat</span> <span class="o">=</span> <span class="n">ma1</span><span class="o">.</span><span class="n">stiffness_matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">ma1kmat</span>
+<span class="go">[[  4.7e+10   2.3e+10  -3.0e+10  -1.1e+10  -1.9e+10  -2.0e+10   2.0e+09   8.6e+09]</span>
+<span class="go"> [  2.3e+10   1.1e+11  -2.8e+10  -2.7e+09  -2.0e+10  -7.0e+10   2.5e+10  -3.9e+10]</span>
+<span class="go"> [ -3.0e+10  -2.8e+10   6.1e+10  -1.2e+10  -1.5e+09   2.5e+10  -2.9e+10   1.5e+10]</span>
+<span class="go"> [ -1.1e+10  -2.7e+09  -1.2e+10   4.9e+10   8.3e+09  -4.4e+10   1.5e+10  -2.5e+09]</span>
+<span class="go"> [ -1.9e+10  -2.0e+10  -1.5e+09   8.3e+09   4.0e+10   2.2e+10  -1.9e+10  -1.0e+10]</span>
+<span class="go"> [ -2.0e+10  -7.0e+10   2.5e+10  -4.4e+10   2.2e+10   1.0e+11  -2.7e+10   1.3e+10]</span>
+<span class="go"> [  2.0e+09   2.5e+10  -2.9e+10   1.5e+10  -1.9e+10  -2.7e+10   4.7e+10  -1.4e+10]</span>
+<span class="go"> [  8.6e+09  -3.9e+10   1.5e+10  -2.5e+09  -1.0e+10   1.3e+10  -1.4e+10   2.8e+10]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.c_plan.MECPQU8">
+<em class="property">class </em><tt class="descclassname">teefem.models.c_plan.</tt><tt class="descname">MECPQU8</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.c_plan.MECPQU8" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.c_plan.PlaneStressElement2D" class="reference internal" href="#teefem.models.c_plan.PlaneStressElement2D"><tt class="xref docutils literal"><span class="pre">teefem.models.c_plan.PlaneStressElement2D</span></tt></a></p>
+<p>Plane stress quadratic 8-node Serendip finite element</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.c_plan.MECPQU9">
+<em class="property">class </em><tt class="descclassname">teefem.models.c_plan.</tt><tt class="descname">MECPQU9</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.c_plan.MECPQU9" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.c_plan.PlaneStressElement2D" class="reference internal" href="#teefem.models.c_plan.PlaneStressElement2D"><tt class="xref docutils literal"><span class="pre">teefem.models.c_plan.PlaneStressElement2D</span></tt></a></p>
+<p>Plane stress quadratic 9-node finite element</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.c_plan.MECPTR3">
+<em class="property">class </em><tt class="descclassname">teefem.models.c_plan.</tt><tt class="descname">MECPTR3</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.c_plan.MECPTR3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.c_plan.PlaneStressElement2D" class="reference internal" href="#teefem.models.c_plan.PlaneStressElement2D"><tt class="xref docutils literal"><span class="pre">teefem.models.c_plan.PlaneStressElement2D</span></tt></a></p>
+<p>Plane stress linear triangle finite element CST</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tr3</span> <span class="o">=</span> <span class="n">Tria3</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;tr3&#39;</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tr3</span><span class="o">.</span><span class="n">material</span> <span class="o">=</span> <span class="n">Elastic</span><span class="p">(</span><span class="n">E</span> <span class="o">=</span> <span class="mf">210e9</span><span class="p">,</span> <span class="n">nu</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el3</span> <span class="o">=</span> <span class="n">MECPTR3</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="n">tr3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s">&#39;img/MECPTR3.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/MECPTR3.png" src="_images/MECPTR3.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">el3emat</span> <span class="o">=</span> <span class="n">el3</span><span class="o">.</span><span class="n">material_matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">el3emat</span>
+<span class="go">[[  2.3e+11   6.9e+10   0.0e+00]</span>
+<span class="go"> [  6.9e+10   2.3e+11   0.0e+00]</span>
+<span class="go"> [  0.0e+00   0.0e+00   8.1e+10]]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">el3bmat</span> <span class="o">=</span> <span class="n">el3</span><span class="o">.</span><span class="n">kinematic_matrix</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">el3bmat</span>
+<span class="go">[[-0.3  0.   0.6  0.  -0.3  0. ]</span>
+<span class="go"> [ 0.  -0.4  0.  -0.1  0.   0.6]</span>
+<span class="go"> [-0.4 -0.3 -0.1  0.6  0.6 -0.3]]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">el3kmat</span> <span class="o">=</span> <span class="n">el3</span><span class="o">.</span><span class="n">stiffness_matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">el3kmat</span>
+<span class="go">[[  5.9e+10   3.2e+10  -5.7e+10  -3.0e+10  -1.6e+09  -2.5e+09]</span>
+<span class="go"> [  3.2e+10   8.6e+10  -2.4e+10   1.6e+09  -8.2e+09  -8.7e+10]</span>
+<span class="go"> [ -5.7e+10  -2.4e+10   1.3e+11  -2.1e+10  -7.7e+10   4.5e+10]</span>
+<span class="go"> [ -3.0e+10   1.6e+09  -2.1e+10   5.4e+10   5.1e+10  -5.6e+10]</span>
+<span class="go"> [ -1.6e+09  -8.2e+09  -7.7e+10   5.1e+10   7.9e+10  -4.3e+10]</span>
+<span class="go"> [ -2.5e+09  -8.7e+10   4.5e+10  -5.6e+10  -4.3e+10   1.4e+11]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.c_plan.MECPTR6">
+<em class="property">class </em><tt class="descclassname">teefem.models.c_plan.</tt><tt class="descname">MECPTR6</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.c_plan.MECPTR6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.c_plan.PlaneStressElement2D" class="reference internal" href="#teefem.models.c_plan.PlaneStressElement2D"><tt class="xref docutils literal"><span class="pre">teefem.models.c_plan.PlaneStressElement2D</span></tt></a></p>
+<p>Plane stress quadratic triangular finite element</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n4</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n5</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n6</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tr6</span> <span class="o">=</span> <span class="n">Tria6</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;tr6&#39;</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">n4</span><span class="p">,</span> <span class="n">n5</span><span class="p">,</span> <span class="n">n6</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tr6</span><span class="o">.</span><span class="n">material</span> <span class="o">=</span> <span class="n">Elastic</span><span class="p">(</span><span class="n">E</span> <span class="o">=</span> <span class="mf">210e9</span><span class="p">,</span> <span class="n">nu</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el6</span> <span class="o">=</span> <span class="n">MECPTR6</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="n">tr6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el6</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s">&#39;img/MECPTR6.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/MECPTR6.png" src="_images/MECPTR6.png" />
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">el6emat</span> <span class="o">=</span> <span class="n">el6</span><span class="o">.</span><span class="n">material_matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">el6emat</span>
+<span class="go">[[  2.3e+11   6.9e+10   0.0e+00]</span>
+<span class="go"> [  6.9e+10   2.3e+11   0.0e+00]</span>
+<span class="go"> [  0.0e+00   0.0e+00   8.1e+10]]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">el6bmat</span> <span class="o">=</span> <span class="n">el6</span><span class="o">.</span><span class="n">kinematic_matrix</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">el6bmat</span>
+<span class="go">[[-0.2  0.   0.2  0.  -0.   0.   0.1  0.   0.7  0.  -0.8  0. ]</span>
+<span class="go"> [ 0.  -0.2  0.  -0.   0.   0.2  0.  -0.7  0.   0.6  0.   0.1]</span>
+<span class="go"> [-0.2 -0.2 -0.   0.2  0.2 -0.  -0.7  0.1  0.6  0.7  0.1 -0.8]]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">el6kmat</span> <span class="o">=</span> <span class="n">el6</span><span class="o">.</span><span class="n">stiffness_matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">el6kmat</span>
+<span class="go">[[  1.9e+11   7.2e+10   2.3e+10   1.3e+10   1.9e+10   1.7e+10  -1.5e+11  -2.0e+10  -9.5e+09  -2.5e+10  -7.4e+10  -5.7e+10]</span>
+<span class="go"> [  7.2e+10   1.4e+11   1.1e+10   8.4e+09   1.9e+10   2.7e+10  -1.2e+10  -4.4e+10  -2.5e+10  -1.2e+09  -6.4e+10  -1.3e+11]</span>
+<span class="go"> [  2.3e+10   1.1e+10   1.2e+11   4.6e+09   1.5e+10  -1.0e+10  -1.5e+10  -4.4e+10  -1.5e+11   4.8e+10   1.2e+10  -9.7e+09]</span>
+<span class="go"> [  1.3e+10   8.4e+09   4.6e+09   4.2e+10  -1.2e+10   7.1e+09  -5.1e+10  -2.1e+10   5.6e+10  -4.1e+10  -9.7e+09   3.7e+09]</span>
+<span class="go"> [  1.9e+10   1.9e+10   1.5e+10  -1.2e+10   3.6e+10   9.3e+09   9.9e+08  -2.2e+10   5.3e+09   7.0e+10  -7.5e+10  -6.5e+10]</span>
+<span class="go"> [  1.7e+10   2.7e+10  -1.0e+10   7.1e+09   9.3e+09   8.5e+10  -2.2e+10   1.1e+10   6.2e+10  -3.6e+10  -5.7e+10  -9.5e+10]</span>
+<span class="go"> [ -1.5e+11  -1.2e+10  -1.5e+10  -5.1e+10   9.9e+08  -2.2e+10   2.6e+11  -5.5e+10  -6.6e+10   4.1e+10  -2.8e+10   9.9e+10]</span>
+<span class="go"> [ -2.0e+10  -4.4e+10  -4.4e+10  -2.1e+10  -2.2e+10   1.1e+10  -5.5e+10   3.6e+11   4.1e+10  -2.7e+11   9.9e+10  -4.5e+10]</span>
+<span class="go"> [ -9.5e+09  -2.5e+10  -1.5e+11   5.6e+10   5.3e+09   6.2e+10  -6.6e+10   4.1e+10   5.9e+11  -9.6e+10  -3.7e+11  -3.8e+10]</span>
+<span class="go"> [ -2.5e+10  -1.2e+09   4.8e+10  -4.1e+10   7.0e+10  -3.6e+10   4.1e+10  -2.7e+11  -9.6e+10   4.4e+11  -3.8e+10  -9.4e+10]</span>
+<span class="go"> [ -7.4e+10  -6.4e+10   1.2e+10  -9.7e+09  -7.5e+10  -5.7e+10  -2.8e+10   9.9e+10  -3.7e+11  -3.8e+10   5.4e+11   7.1e+10]</span>
+<span class="go"> [ -5.7e+10  -1.3e+11  -9.7e+09   3.7e+09  -6.5e+10  -9.5e+10   9.9e+10  -4.5e+10  -3.8e+10  -9.4e+10   7.1e+10   3.6e+11]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.c_plan.MEPLSE2">
+<em class="property">class </em><tt class="descclassname">teefem.models.c_plan.</tt><tt class="descname">MEPLSE2</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.c_plan.MEPLSE2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.c_plan.PlaneStressElement1D" class="reference internal" href="#teefem.models.c_plan.PlaneStressElement1D"><tt class="xref docutils literal"><span class="pre">teefem.models.c_plan.PlaneStressElement1D</span></tt></a></p>
+<p>Plane stress linear line element.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.c_plan.MEPLSE3">
+<em class="property">class </em><tt class="descclassname">teefem.models.c_plan.</tt><tt class="descname">MEPLSE3</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.c_plan.MEPLSE3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.c_plan.PlaneStressElement1D" class="reference internal" href="#teefem.models.c_plan.PlaneStressElement1D"><tt class="xref docutils literal"><span class="pre">teefem.models.c_plan.PlaneStressElement1D</span></tt></a></p>
+<p>Plane stress quadratic line element.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.c_plan.PlaneStressElement1D">
+<em class="property">class </em><tt class="descclassname">teefem.models.c_plan.</tt><tt class="descname">PlaneStressElement1D</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.c_plan.PlaneStressElement1D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.elements.Element1D" class="reference internal" href="#teefem.elements.Element1D"><tt class="xref docutils literal"><span class="pre">teefem.elements.Element1D</span></tt></a></p>
+<p>Plane stress 1d elements, general class.</p>
+<dl class="method">
+<dt id="teefem.models.c_plan.PlaneStressElement1D.assign_boundary_condition">
+<tt class="descname">assign_boundary_condition</tt><big>(</big><em>bc</em><big>)</big><a class="headerlink" href="#teefem.models.c_plan.PlaneStressElement1D.assign_boundary_condition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.c_plan.PlaneStressElement1D.force_vector">
+<tt class="descname">force_vector</tt><a class="headerlink" href="#teefem.models.c_plan.PlaneStressElement1D.force_vector" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.c_plan.PlaneStressElement2D">
+<em class="property">class </em><tt class="descclassname">teefem.models.c_plan.</tt><tt class="descname">PlaneStressElement2D</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.c_plan.PlaneStressElement2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.elements.Element2D" class="reference internal" href="#teefem.elements.Element2D"><tt class="xref docutils literal"><span class="pre">teefem.elements.Element2D</span></tt></a></p>
+<p>Plane stress 2d elements, general class.</p>
+<dl class="method">
+<dt id="teefem.models.c_plan.PlaneStressElement2D.assign_material">
+<tt class="descname">assign_material</tt><big>(</big><em>mat</em><big>)</big><a class="headerlink" href="#teefem.models.c_plan.PlaneStressElement2D.assign_material" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.c_plan.PlaneStressElement2D.detJ">
+<tt class="descname">detJ</tt><a class="headerlink" href="#teefem.models.c_plan.PlaneStressElement2D.detJ" title="Permalink to this definition">¶</a></dt>
+<dd>Decorator that caches a function&#8217;s return value each time it is called.
+If called later with the same arguments, the cached value is returned, and
+not re-evaluated.</dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.c_plan.PlaneStressElement2D.stiffness_matrix">
+<tt class="descname">stiffness_matrix</tt><a class="headerlink" href="#teefem.models.c_plan.PlaneStressElement2D.stiffness_matrix" title="Permalink to this definition">¶</a></dt>
+<dd>Stiffness matrix K</dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.c_plan.PlaneStressElement2D.update">
+<tt class="descname">update</tt><big>(</big><em>U</em><big>)</big><a class="headerlink" href="#teefem.models.c_plan.PlaneStressElement2D.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.c_plan.cplan">
+<tt class="descclassname">teefem.models.c_plan.</tt><tt class="descname">cplan</tt><a class="headerlink" href="#teefem.models.c_plan.cplan" title="Permalink to this definition">¶</a></dt>
+<dd>alias of <a title="teefem.models.c_plan.C_PLAN" class="reference internal" href="#teefem.models.c_plan.C_PLAN"><tt class="xref docutils literal"><span class="pre">C_PLAN</span></tt></a></dd></dl>
+
+<div class="section" id="discrete-kirchhoff-elements">
+<h2>Discrete Kirchhoff elements<a class="headerlink" href="#discrete-kirchhoff-elements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><cite>examples/dkt_ex1.py</cite> &#8211; dkt_ex1.py</li>
+</ul>
+<dl class="class">
+<dt id="teefem.models.dkt.DKT">
+<em class="property">class </em><tt class="descclassname">teefem.models.dkt.</tt><tt class="descname">DKT</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.dkt.DKT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.common.Model" class="reference internal" href="#teefem.models.common.Model"><tt class="xref docutils literal"><span class="pre">teefem.models.common.Model</span></tt></a></p>
+<p>Discrete Kirchhoff Triangle model.</p>
+<dl class="method">
+<dt id="teefem.models.dkt.DKT.plot">
+<tt class="descname">plot</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.dkt.DKT.plot" title="Permalink to this definition">¶</a></dt>
+<dd>Plottaus.</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.dkt.MEBODKT">
+<em class="property">class </em><tt class="descclassname">teefem.models.dkt.</tt><tt class="descname">MEBODKT</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.dkt.MEBODKT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.elements.Element1D" class="reference internal" href="#teefem.elements.Element1D"><tt class="xref docutils literal"><span class="pre">teefem.elements.Element1D</span></tt></a></p>
+<p>SEG2 element in DKT formulation</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.dkt.MEDKTR3">
+<em class="property">class </em><tt class="descclassname">teefem.models.dkt.</tt><tt class="descname">MEDKTR3</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.dkt.MEDKTR3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.elements.Element2D" class="reference internal" href="#teefem.elements.Element2D"><tt class="xref docutils literal"><span class="pre">teefem.elements.Element2D</span></tt></a></p>
+<p>DKT finite element</p>
+<dl class="attribute">
+<dt id="teefem.models.dkt.MEDKTR3.U">
+<tt class="descname">U</tt><a class="headerlink" href="#teefem.models.dkt.MEDKTR3.U" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.dkt.MEDKTR3.assign_boundary_condition">
+<tt class="descname">assign_boundary_condition</tt><big>(</big><em>bc</em><big>)</big><a class="headerlink" href="#teefem.models.dkt.MEDKTR3.assign_boundary_condition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.dkt.MEDKTR3.assign_char">
+<tt class="descname">assign_char</tt><big>(</big><em>char</em><big>)</big><a class="headerlink" href="#teefem.models.dkt.MEDKTR3.assign_char" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.dkt.MEDKTR3.assign_material">
+<tt class="descname">assign_material</tt><big>(</big><em>mat</em><big>)</big><a class="headerlink" href="#teefem.models.dkt.MEDKTR3.assign_material" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.dkt.MEDKTR3.detJ">
+<tt class="descname">detJ</tt><a class="headerlink" href="#teefem.models.dkt.MEDKTR3.detJ" title="Permalink to this definition">¶</a></dt>
+<dd>Decorator that caches a function&#8217;s return value each time it is called.
+If called later with the same arguments, the cached value is returned, and
+not re-evaluated.</dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.dkt.MEDKTR3.force_vector">
+<tt class="descname">force_vector</tt><a class="headerlink" href="#teefem.models.dkt.MEDKTR3.force_vector" title="Permalink to this definition">¶</a></dt>
+<dd>Palauttaa kuormitusvektorin</dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.dkt.MEDKTR3.plot">
+<tt class="descname">plot</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.dkt.MEDKTR3.plot" title="Permalink to this definition">¶</a></dt>
+<dd>Plot geometry with mplot3d</dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.dkt.MEDKTR3.plot2">
+<tt class="descname">plot2</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.dkt.MEDKTR3.plot2" title="Permalink to this definition">¶</a></dt>
+<dd>Plot geometry with mplot3d</dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.dkt.MEDKTR3.stiffness_matrix">
+<tt class="descname">stiffness_matrix</tt><a class="headerlink" href="#teefem.models.dkt.MEDKTR3.stiffness_matrix" title="Permalink to this definition">¶</a></dt>
+<dd>Stiffness matrix</dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.dkt.MEDKTR3.update">
+<tt class="descname">update</tt><big>(</big><em>U</em><big>)</big><a class="headerlink" href="#teefem.models.dkt.MEDKTR3.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.dkt.MEDKTR3.w">
+<tt class="descname">w</tt><big>(</big><em>k</em>, <em>e</em><big>)</big><a class="headerlink" href="#teefem.models.dkt.MEDKTR3.w" title="Permalink to this definition">¶</a></dt>
+<dd>Jostakin löytyi tämmöset muofofunktioit joilla voisi yrittää
+interpoloida siirtymäkenttää elementin alueella.</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.dkt.checkmatrix">
+<tt class="descclassname">teefem.models.dkt.</tt><tt class="descname">checkmatrix</tt><big>(</big><em>A</em><big>)</big><a class="headerlink" href="#teefem.models.dkt.checkmatrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.dkt.dkt">
+<tt class="descclassname">teefem.models.dkt.</tt><tt class="descname">dkt</tt><a class="headerlink" href="#teefem.models.dkt.dkt" title="Permalink to this definition">¶</a></dt>
+<dd>alias of <a title="teefem.models.dkt.DKT" class="reference internal" href="#teefem.models.dkt.DKT"><tt class="xref docutils literal"><span class="pre">DKT</span></tt></a></dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.dkt.ex1">
+<tt class="descclassname">teefem.models.dkt.</tt><tt class="descname">ex1</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.dkt.ex1" title="Permalink to this definition">¶</a></dt>
+<dd>Suorakaidelaatta, tasan jakautunut kuorma</dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.dkt.ex2">
+<tt class="descclassname">teefem.models.dkt.</tt><tt class="descname">ex2</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.dkt.ex2" title="Permalink to this definition">¶</a></dt>
+<dd>DKT esimerkki 1, pyörähdyssymmetrinen laatta jakautuneella kuormalla</dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.dkt.plotmdl">
+<tt class="descclassname">teefem.models.dkt.</tt><tt class="descname">plotmdl</tt><big>(</big><em>mdl</em>, <em>vmis</em><big>)</big><a class="headerlink" href="#teefem.models.dkt.plotmdl" title="Permalink to this definition">¶</a></dt>
+<dd>Plottailee kaikenlaisia kuvaajia</dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.dkt.rotsy">
+<tt class="descclassname">teefem.models.dkt.</tt><tt class="descname">rotsy</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.dkt.rotsy" title="Permalink to this definition">¶</a></dt>
+<dd>Ympyrälaatan tarkkoja ratkaisuja</dd></dl>
+
+</div>
+</div>
+<p>Created on Sun Mar 11 02:04:59 2012</p>
+<p>&#64;author: Jukka</p>
+<p>Mindlin elementti, perusversio.</p>
+<dl class="class">
+<dt id="teefem.models.dsts6.DSTS6TR3">
+<em class="property">class </em><tt class="descclassname">teefem.models.dsts6.</tt><tt class="descname">DSTS6TR3</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.dsts6.DSTS6TR3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.mindlin.MINTR3" class="reference internal" href="#teefem.models.mindlin.MINTR3"><tt class="xref docutils literal"><span class="pre">teefem.models.mindlin.MINTR3</span></tt></a></p>
+<p>DSTS6TR3 TRIA3 Reissner-Mindlin finite element</p>
+<dl class="method">
+<dt id="teefem.models.dsts6.DSTS6TR3.Bb">
+<tt class="descname">Bb</tt><big>(</big><em>*ke</em><big>)</big><a class="headerlink" href="#teefem.models.dsts6.DSTS6TR3.Bb" title="Permalink to this definition">¶</a></dt>
+<dd>Kinemaattinen matriisi Bb</dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.dsts6.DSTS6TR3.Bs">
+<tt class="descname">Bs</tt><big>(</big><em>*ke</em><big>)</big><a class="headerlink" href="#teefem.models.dsts6.DSTS6TR3.Bs" title="Permalink to this definition">¶</a></dt>
+<dd>Kinemaattinen matriisi Bs</dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.dsts6.DSTS6TR3.force_vector">
+<tt class="descname">force_vector</tt><a class="headerlink" href="#teefem.models.dsts6.DSTS6TR3.force_vector" title="Permalink to this definition">¶</a></dt>
+<dd>Palauttaa kuormitusvektorin</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.dsts6.MINDSTS6">
+<em class="property">class </em><tt class="descclassname">teefem.models.dsts6.</tt><tt class="descname">MINDSTS6</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.dsts6.MINDSTS6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.common.Model" class="reference internal" href="#teefem.models.common.Model"><tt class="xref docutils literal"><span class="pre">teefem.models.common.Model</span></tt></a></p>
+<p>DST-S6</p>
+<dl class="method">
+<dt id="teefem.models.dsts6.MINDSTS6.plot">
+<tt class="descname">plot</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.dsts6.MINDSTS6.plot" title="Permalink to this definition">¶</a></dt>
+<dd>Plottaa siirtymäkentän matplotlibillä</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.dsts6.dsts6">
+<tt class="descclassname">teefem.models.dsts6.</tt><tt class="descname">dsts6</tt><a class="headerlink" href="#teefem.models.dsts6.dsts6" title="Permalink to this definition">¶</a></dt>
+<dd>alias of <a title="teefem.models.dsts6.MINDSTS6" class="reference internal" href="#teefem.models.dsts6.MINDSTS6"><tt class="xref docutils literal"><span class="pre">MINDSTS6</span></tt></a></dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.dsts6.ex1">
+<tt class="descclassname">teefem.models.dsts6.</tt><tt class="descname">ex1</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.dsts6.ex1" title="Permalink to this definition">¶</a></dt>
+<dd>Mindlin esimerkki 1, pyörähdyssymmetrinen laatta jakautuneella kuormalla</dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.dsts6.shapef">
+<tt class="descclassname">teefem.models.dsts6.</tt><tt class="descname">shapef</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.dsts6.shapef" title="Permalink to this definition">¶</a></dt>
+<dd>Pyörittelee DST-6 funktiot</dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.dsts6.shapeftest">
+<tt class="descclassname">teefem.models.dsts6.</tt><tt class="descname">shapeftest</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.dsts6.shapeftest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.dsts6.test">
+<tt class="descclassname">teefem.models.dsts6.</tt><tt class="descname">test</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.dsts6.test" title="Permalink to this definition">¶</a></dt>
+<dd>DSTS6TR3-elementin matriisien tarkistus</dd></dl>
+
+<p>Created on Sun Mar 11 02:04:59 2012</p>
+<p>&#64;author: Jukka</p>
+<p>Mindlin elementti. Tessler ja Hughesin versio.</p>
+<dl class="class">
+<dt id="teefem.models.min3.MINTH">
+<em class="property">class </em><tt class="descclassname">teefem.models.min3.</tt><tt class="descname">MINTH</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.min3.MINTH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.mindlin.MindlinModel" class="reference internal" href="#teefem.models.mindlin.MindlinModel"><tt class="xref docutils literal"><span class="pre">teefem.models.mindlin.MindlinModel</span></tt></a></p>
+<p>Reissner-Mindlin Tessler &amp; Hughes model</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.min3.MINTR3TH">
+<em class="property">class </em><tt class="descclassname">teefem.models.min3.</tt><tt class="descname">MINTR3TH</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.min3.MINTR3TH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.mindlin.MINTR3" class="reference internal" href="#teefem.models.mindlin.MINTR3"><tt class="xref docutils literal"><span class="pre">teefem.models.mindlin.MINTR3</span></tt></a></p>
+<p>Mindlin TRIA3 Tessler &amp; Hughes</p>
+<dl class="method">
+<dt id="teefem.models.min3.MINTR3TH.Bs">
+<tt class="descname">Bs</tt><big>(</big><em>*ke</em><big>)</big><a class="headerlink" href="#teefem.models.min3.MINTR3TH.Bs" title="Permalink to this definition">¶</a></dt>
+<dd>Kinemaattinen matriisi Bs</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.min3.ex1">
+<tt class="descclassname">teefem.models.min3.</tt><tt class="descname">ex1</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.min3.ex1" title="Permalink to this definition">¶</a></dt>
+<dd>Mindlin esimerkki 1, pyörähdyssymmetrinen laatta jakautuneella kuormalla</dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.min3.genshapef">
+<tt class="descclassname">teefem.models.min3.</tt><tt class="descname">genshapef</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.min3.genshapef" title="Permalink to this definition">¶</a></dt>
+<dd>Tessler ja Hughes muotofunktioiden pyörittelyä</dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.min3.minth">
+<tt class="descclassname">teefem.models.min3.</tt><tt class="descname">minth</tt><a class="headerlink" href="#teefem.models.min3.minth" title="Permalink to this definition">¶</a></dt>
+<dd>alias of <a title="teefem.models.min3.MINTH" class="reference internal" href="#teefem.models.min3.MINTH"><tt class="xref docutils literal"><span class="pre">MINTH</span></tt></a></dd></dl>
+
+<p>Created on Sun Mar 11 12:04:59 2012</p>
+<p>&#64;author: Jukka</p>
+<p>Mindlin elementti, perusversio.</p>
+<dl class="class">
+<dt id="teefem.models.mindlin.MIN">
+<em class="property">class </em><tt class="descclassname">teefem.models.mindlin.</tt><tt class="descname">MIN</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.mindlin.MIN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.mindlin.MindlinModel" class="reference internal" href="#teefem.models.mindlin.MindlinModel"><tt class="xref docutils literal"><span class="pre">teefem.models.mindlin.MindlinModel</span></tt></a></p>
+<p>Reissner-Mindlin model</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.mindlin.MINR">
+<em class="property">class </em><tt class="descclassname">teefem.models.mindlin.</tt><tt class="descname">MINR</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.mindlin.MINR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.mindlin.MindlinModel" class="reference internal" href="#teefem.models.mindlin.MindlinModel"><tt class="xref docutils literal"><span class="pre">teefem.models.mindlin.MindlinModel</span></tt></a></p>
+<p>Reissner-Mindlin model, reduced integration</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.mindlin.MINTR3">
+<em class="property">class </em><tt class="descclassname">teefem.models.mindlin.</tt><tt class="descname">MINTR3</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.mindlin.MINTR3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.elements.Element2D" class="reference internal" href="#teefem.elements.Element2D"><tt class="xref docutils literal"><span class="pre">teefem.elements.Element2D</span></tt></a></p>
+<p>MINTR3 TRIA3 Reissner-Mindlin finite element</p>
+<dl class="method">
+<dt id="teefem.models.mindlin.MINTR3.Bb">
+<tt class="descname">Bb</tt><big>(</big><em>*ke</em><big>)</big><a class="headerlink" href="#teefem.models.mindlin.MINTR3.Bb" title="Permalink to this definition">¶</a></dt>
+<dd>Kinemaattinen matriisi Bb</dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.mindlin.MINTR3.Bs">
+<tt class="descname">Bs</tt><big>(</big><em>*ke</em><big>)</big><a class="headerlink" href="#teefem.models.mindlin.MINTR3.Bs" title="Permalink to this definition">¶</a></dt>
+<dd>Kinemaattinen matriisi Bs</dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.mindlin.MINTR3.Db">
+<tt class="descname">Db</tt><big>(</big><em>*ke</em><big>)</big><a class="headerlink" href="#teefem.models.mindlin.MINTR3.Db" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.mindlin.MINTR3.Ds">
+<tt class="descname">Ds</tt><big>(</big><em>*ke</em><big>)</big><a class="headerlink" href="#teefem.models.mindlin.MINTR3.Ds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.mindlin.MINTR3.assign_boundary_condition">
+<tt class="descname">assign_boundary_condition</tt><big>(</big><em>bc</em><big>)</big><a class="headerlink" href="#teefem.models.mindlin.MINTR3.assign_boundary_condition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.mindlin.MINTR3.assign_char">
+<tt class="descname">assign_char</tt><big>(</big><em>char</em><big>)</big><a class="headerlink" href="#teefem.models.mindlin.MINTR3.assign_char" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.mindlin.MINTR3.assign_material">
+<tt class="descname">assign_material</tt><big>(</big><em>mat</em><big>)</big><a class="headerlink" href="#teefem.models.mindlin.MINTR3.assign_material" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.mindlin.MINTR3.force_vector">
+<tt class="descname">force_vector</tt><a class="headerlink" href="#teefem.models.mindlin.MINTR3.force_vector" title="Permalink to this definition">¶</a></dt>
+<dd>Palauttaa kuormitusvektorin</dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.mindlin.MINTR3.stiffness_matrix">
+<tt class="descname">stiffness_matrix</tt><a class="headerlink" href="#teefem.models.mindlin.MINTR3.stiffness_matrix" title="Permalink to this definition">¶</a></dt>
+<dd>Jäykkyysmatriisi</dd></dl>
+
+<dl class="method">
+<dt id="teefem.models.mindlin.MINTR3.update">
+<tt class="descname">update</tt><big>(</big><em>U</em><big>)</big><a class="headerlink" href="#teefem.models.mindlin.MINTR3.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.mindlin.MINTR3R">
+<em class="property">class </em><tt class="descclassname">teefem.models.mindlin.</tt><tt class="descname">MINTR3R</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.mindlin.MINTR3R" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.mindlin.MINTR3" class="reference internal" href="#teefem.models.mindlin.MINTR3"><tt class="xref docutils literal"><span class="pre">teefem.models.mindlin.MINTR3</span></tt></a></p>
+<p>MINTR3 TRIA3 Reissner-Mindlin finite element, reduced integration</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="teefem.models.mindlin.MindlinModel">
+<em class="property">class </em><tt class="descclassname">teefem.models.mindlin.</tt><tt class="descname">MindlinModel</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.mindlin.MindlinModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="teefem.models.common.Model" class="reference internal" href="#teefem.models.common.Model"><tt class="xref docutils literal"><span class="pre">teefem.models.common.Model</span></tt></a></p>
+<p>Mindlin model</p>
+<dl class="method">
+<dt id="teefem.models.mindlin.MindlinModel.plot">
+<tt class="descname">plot</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#teefem.models.mindlin.MindlinModel.plot" title="Permalink to this definition">¶</a></dt>
+<dd>Plottaa siirtymäkentän matplotlibillä</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.mindlin.ex1">
+<tt class="descclassname">teefem.models.mindlin.</tt><tt class="descname">ex1</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.mindlin.ex1" title="Permalink to this definition">¶</a></dt>
+<dd>Mindlin esimerkki 1, pyörähdyssymmetrinen laatta jakautuneella kuormalla</dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.mindlin.mindlin">
+<tt class="descclassname">teefem.models.mindlin.</tt><tt class="descname">mindlin</tt><a class="headerlink" href="#teefem.models.mindlin.mindlin" title="Permalink to this definition">¶</a></dt>
+<dd>alias of <a title="teefem.models.mindlin.MIN" class="reference internal" href="#teefem.models.mindlin.MIN"><tt class="xref docutils literal"><span class="pre">MIN</span></tt></a></dd></dl>
+
+<dl class="attribute">
+<dt id="teefem.models.mindlin.mindlin_reduced">
+<tt class="descclassname">teefem.models.mindlin.</tt><tt class="descname">mindlin_reduced</tt><a class="headerlink" href="#teefem.models.mindlin.mindlin_reduced" title="Permalink to this definition">¶</a></dt>
+<dd>alias of <a title="teefem.models.mindlin.MINR" class="reference internal" href="#teefem.models.mindlin.MINR"><tt class="xref docutils literal"><span class="pre">MINR</span></tt></a></dd></dl>
+
+<dl class="function">
+<dt id="teefem.models.mindlin.test">
+<tt class="descclassname">teefem.models.mindlin.</tt><tt class="descname">test</tt><big>(</big><big>)</big><a class="headerlink" href="#teefem.models.mindlin.test" title="Permalink to this definition">¶</a></dt>
+<dd>MINTR3SI-elementin matriisien tarkistus</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="#">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Welcome to TeeFEM&#8217;s documentation!</a><ul>
+</ul>
+</li>
+<li><a class="reference external" href="#module-teefem.models.mindlin">Indices and tables</a><ul>
+<li><a class="reference external" href="#elements-py-finite-elements">### Elements.py - FINITE ELEMENTS ###</a></li>
+<li><a class="reference external" href="#materials-py-material-models">### materials.py - MATERIAL MODELS ###</a></li>
+<li><a class="reference external" href="#discrete-kirchhoff-elements">Discrete Kirchhoff elements</a><ul>
+<li><a class="reference external" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/index.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li><a href="#">TeeFEM - Teekkari FEM v0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2012, Jukka Aho.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.6.
+    </div>
+  </body>
+</html>
