@@ -593,8 +593,8 @@ def parsemsh(fh):
             shape.groups.add(regions[eregion])
             mesh.group_ma[regions[eregion]].add(shape)
             
+    mesh.create_node_groups()
     return mesh
-#    mesh.create_node_groups()
 
 
 def parsemed(fh):

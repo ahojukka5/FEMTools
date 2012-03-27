@@ -11,8 +11,9 @@ Created on Thu Mar 08 00:03:31 2012
 
 from __future__ import division
 # import sys
-import numpy as np
-from numpy import matrix, array, zeros
+# import numpy as np
+from numpy import matrix, zeros
+from teefem import cache
 
 class Element(object):
 
@@ -29,7 +30,11 @@ class Element(object):
 #        self.has_stiffness = False
 #        self.material = self.geom.material
         
-    
+    @property
+    @cache
+    def detJ(self):
+        return self.geom.detJ
+
     @property
     def J(self):
         return self.geom.J
@@ -41,9 +46,20 @@ class Element(object):
     @property
     def area(self):
         return self.geom.area
-    
+
     def update(self, U):
-        pass
+        u = zeros(self.dimension)
+        nodedim = len(self.degrees_of_freedom)
+        for i in xrange(len(self.nodes)):
+            node = self.nodes[i]
+            node.update_field(
+                field = 'DEPL', 
+                params = self.degrees_of_freedom, 
+                values = [U[node.gdof[j]] for j in xrange(nodedim)]
+                )
+            for j in xrange(nodedim):
+                u[i*nodedim+j] = U[node.gdof[j]]
+        self.u = matrix(u).T
 
     @property
     def status(self):
@@ -81,6 +97,7 @@ class Element2D(Element):
 
     def __init__(self, *args, **kwds):
         super(Element2D, self).__init__(*args, **kwds)
+
 
 #    def kinematic_matrix(self,*ke):
 #        r""" Returns plane kinematic matrix B 

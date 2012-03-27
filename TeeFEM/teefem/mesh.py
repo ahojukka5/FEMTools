@@ -29,8 +29,18 @@ import matplotlib.pylab as plt
 import matplotlib.delaunay
 np.set_printoptions(precision = 2, edgeitems=20)
 
-def unitcircle(R=1,lc=1):
-    ''' Yksikköympyrä '''
+def unitcircle(R=1,lc=1,meshtype='Tria3'):
+    ''' 
+    
+    Yksikköympyrä
+    
+    Kolmioelementit
+    
+    Kentän elementit ovat elementtiryhmässä OM1 ja solmupisteryhmässä OM1
+    Reuna on elementtiryhmässä GA1 ja solmupisteryhmässä GA1
+    
+    '''
+    
     meshfile = teefem.os.path.join(teefem.datadir, 'tria3.mail') # Linear triangle mesh file
     mesh = teefem.geom.mesh(filename = meshfile)
     return mesh
@@ -38,9 +48,13 @@ def unitcircle(R=1,lc=1):
 ###############################################################################
 ###############################################################################
 
-def unitsquare2(L=1,H=1):
+def unitsquare(x1=0,y1=0,x2=1,y2=1,lx=10,ly=10,meshtype='Tria3'):
     ''' 
-    Suorakaiteen muotoinen yksinkertainen käsintehty verkotus
+    
+    Yksikkösuorakaide
+    
+    Ryhmät
+    
 
     P4---------GA4---------P3
     |                       |
@@ -58,43 +72,10 @@ def unitsquare2(L=1,H=1):
 
     '''
 
-    P1 = teefem.geom.Node(x=0, y=0, z=0.0)
-    P2 = teefem.geom.Node(x=L, y=0, z=0.0)
-    P3 = teefem.geom.Node(x=L, y=H, z=0.0)
-    P4 = teefem.geom.Node(x=0, y=H, z=0.0)
-    P5 = teefem.geom.Node(x=L/2, y=H/2, z=0.0)
-    g1 = teefem.geom.Tria3(name = 'M1', nodes = (P1,P2,P5))
-    g2 = teefem.geom.Tria3(name = 'tr = tri.Triangulation(data[:,0], data[:,1])M2', nodes = (P2,P3,P5))
-    g3 = teefem.geom.Tria3(name = 'M3', nodes = (P3,P4,P5))
-    g4 = teefem.geom.Tria3(name = 'M4', nodes = (P4,P1,P5))
-    mesh = teefem.geom.Mesh()
-    mesh.group_ma['OM1'] = set([g1,g2,g3,g4])
-    mesh.group_no['GA1'] = set([P1,P4])
-    mesh.group_no['GA2'] = set([P1,P2])
-    mesh.group_no['GA3'] = set([P2,P3])
-    mesh.group_no['GA4'] = set([P3,P4])
-    mesh.group_no['P1'] = set([P1])
-    mesh.group_no['P2'] = set([P2])
-    mesh.group_no['P3'] = set([P3])
-    mesh.group_no['P4'] = set([P4])
-    mesh.group_no['P5'] = set([P5])
-    P1.groups = set(['GA1','GA2','P1'])
-    P2.groups = set(['GA2','GA3','P2'])
-    P3.groups = set(['GA3','GA4','P3'])
-    P4.groups = set(['GA4','GA1','P4'])
-    g1.groups.add('OM1')
-    g2.groups.add('OM1')
-    g3.groups.add('OM1')
-    g4.groups.add('OM1')
-    mesh.nodes['N1'] = P1
-    mesh.nodes['N2'] = P2
-    mesh.nodes['N3'] = P3
-    mesh.nodes['N4'] = P4
-    mesh.nodes['N5'] = P5
-    mesh.nets['M1'] = g1
-    mesh.nets['M2'] = g2
-    mesh.nets['M3'] = g3
-    mesh.nets['M4'] = g4
+    # Verkotusalgoritmit ovat tällä hetkellä rikki, käytetään valmista
+    # verkotusdataa
+    meshfile = teefem.os.path.join(teefem.datadir, 'unitsquare_tria3.msh')
+    mesh = teefem.geom.mesh(filename = meshfile)
     return mesh
 
 class Trimesh(matplotlib.delaunay.Triangulation):
@@ -267,43 +248,59 @@ def unitinterval(a=0,b=1,lc=0.1):
     forcemoc(x,y,lock,plot=False,filename='output/unitinterval')
 
 
-def unitsquare(a=1,b=1,lc=0.2):
-    ''' Suorakaiteen muotoinen alue '''
-    xa = np.linspace(-a,a,a/lc)
-    ya = np.linspace(-b,b,b/lc)
-    z = np.zeros(len(xa))
-    o = np.ones(len(xa))
-    x = np.concatenate((xa,xa,o*a,-o*a))
-    y = np.concatenate((-o*a,o*a,ya,ya))
-    print x
-    print y
-        
-    mesh = Trimesh(x,y)
-#    mesh.plot()
-#    plt.show()
-    mesh = refine(mesh, max_edge_length = 0.1)
+def unitsquare2(x1,y1,x2,y2,lx,ly,meshtype='Tria3'):
+    ''' 
+        Suorakaiteen muotoinen alue
+    '''
+    x = np.linspace(x1,x2,lx)
+    y = np.linspace(y1,y2,ly)
+    p = np.array([[xi,yi] for xi in x for yi in y])
+    X = p[:,0]
+    Y = p[:,1]
+    print X
+    print Y
     
+    if meshtype != 'Tria3':
+        return None
+    trmesh = Trimesh(X,Y)
+    trmesh.plot()
+    plt.show()
+    print("Kesken")
+    return None
+    
+    mesh = teefem.geom.Mesh()
+
+#    mesh.nodes = set()
+#    for xi,yi in zip(trmesh.x, trmesh.y):
+#        node = teefem.geom.Node(x = xi, y = yi)
+#        mesh.nodes.add(node)
+    
+    
+
+    return mesh
+#    mesh = refine(mesh, max_edge_length = 0.1)
+#    
 #    mesh.plot()
 #    plt.show()
 
-    x0 = mesh.x
-    y0 = mesh.y
-    edge_db = mesh.edge_db
-
-    nodes = len(x0)
-    dof = 2*nodes
-    dd = len(xa)*4
-    lock = np.ones(2*dof)
-    tol = 1e-5
-    # 0 jos lukittu, 1 jos vapaa
-    for i in range(nodes):
-        if abs(x0[i]-a) < tol or abs(x0[i]+a) < tol:
-            lock[2*i] = 0
-        if abs(y0[i]-b) < tol or abs(y0[i]+b) < tol:
-            lock[2*i+1] = 0
-    lock[0:dd] = 0
-
-    force_eq(x0,y0,edge_db,lock,plot=True,filename='output/unitsquare')
+#    x0 = mesh.x
+#    y0 = mesh.y
+#    edge_db = mesh.edge_db
+#
+#    nodes = len(x0)
+#    dof = 2*nodes
+#    dd = len(xa)*4
+#    lock = np.ones(2*dof)
+#    tol = 1e-5
+#    # 0 jos lukittu, 1 jos vapaa
+#    for i in range(nodes):
+#        if abs(x0[i]-a) < tol or abs(x0[i]+a) < tol:
+#            lock[2*i] = 0
+#        if abs(y0[i]-b) < tol or abs(y0[i]+b) < tol:
+#            lock[2*i+1] = 0
+#    lock[0:dd] = 0
+#
+#    force_eq(x0,y0,edge_db,lock,plot=True,filename='output/unitsquare')
 
     return 0
 
@@ -923,8 +920,8 @@ def force_eq_test1():
 if __name__ == '__main__':
     #forcemoc_test1()
     #force_eq_test1()
-    #unitsquare()
-    unitcircle2()
+    unitsquare(0,0,2,2,10,10)
+    #unitcircle2()
     #unitcircle()
     #unitinterval()
     #sgmtest()

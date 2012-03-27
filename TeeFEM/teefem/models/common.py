@@ -10,6 +10,8 @@ import teefem
 from teefem import log, cache
 #import numpy as np
 from numpy import array, zeros
+import numpy as np
+import scipy
 
 def assign_material(**kwds):
     elements = kwds.get('elements')
@@ -68,12 +70,17 @@ class Model(object):
     @property
     @cache
     def stiff_elements(self):
-        return set([element for element in self.elements if hasattr(element, 'stiffness_matrix')])
+        return set([element for element in self.elements if hasattr(element, 'stiffness_matrix') or element.has_stiffness])
 
     @property
     @cache
     def load_elements(self):
         return set([element for element in self.elements if hasattr(element, 'force_vector')])
+
+    @property
+    @cache
+    def mass_elements(self):
+        return set([element for element in self.elements if hasattr(element, 'mass_matrix') or element.has_mass])
 
     def init(self):
         mapping = self.mapping
@@ -127,24 +134,19 @@ class Model(object):
     
     def _init_stiffness_matrix(self):
         ''' Initialize stiffness matrix '''
-        
         nodedim = self.nodedim
         self.alp = 1e12
         self.lidx = len(self.nodes)*nodedim
-
         for node in self.nodes:
             node.dim = nodedim
-
         idx = 0
-
         for node in self.nodes:
             node.update_boundary_conditions()
             node.gdof = xrange(idx,idx+node.dim)
             idx += node.dim
-
         self.ijv = teefem.common.IJV()
 
-    def _populate_ijv(self):
+    def _populate_stiffness_matrix(self):
         ''' Populate IJV coordinate system '''
         for element in self.stiff_elements:
             try:
@@ -170,29 +172,62 @@ class Model(object):
                     lidx += 1
         self.total_dimension = lidx # Total dimension of stiffness matrix
 
-#    def _assign_boundary_conditions_to_stiffness_matrix(self):
-#        ''' Assign boundary conditions to IJV coordinate system '''
-#        alp = self.alp
-#        ijv = self.ijv
-#        lidx = len(self.nodes)*self.nodedim
-#        for node in self.nodes:
-#            if hasattr(node, 'bc'):
-#                if node.bc.has_key('dx'):
-#                    ijv.add(node.gdof[0],lidx,alp)
-#                    ijv.add(lidx,node.gdof[0],alp)
-#                    lidx += 1
-#                if node.bc.has_key('dy'):
-#                    ijv.add(node.gdof[1],lidx,alp)
-#                    ijv.add(lidx,node.gdof[1],alp)
-#                    lidx += 1
-#        self.total_dimension = lidx # Total dimension of stiffness matrix
-
     def assemble_stiffness_matrix(self):
         ''' Assemble stiffness matrix '''
         self._init_stiffness_matrix()
-        self._populate_ijv()
+        self._populate_stiffness_matrix()
         self._assign_boundary_conditions_to_stiffness_matrix()
         return self.ijv.tocoo()
+
+
+
+    def _init_mass_matrix(self):
+        ''' Initialize stiffness matrix '''
+        nodedim = self.nodedim
+        self.alp = 1e12
+        self.lidx = len(self.nodes)*nodedim
+        for node in self.nodes:
+            node.dim = nodedim
+        idx = 0
+        for node in self.nodes:
+            node.update_boundary_conditions()
+            node.gdof = xrange(idx,idx+node.dim)
+            idx += node.dim
+        self.ijv = teefem.common.IJV()
+
+    def _populate_mass_matrix(self):
+        ''' Populate IJV coordinate system '''
+        for element in self.mass_elements:
+            try:
+                k_loc = element.mass_matrix
+                gdof = array([node.gdof for node in element.nodes]).flatten()
+                for I in xrange(element.dimension):
+                    for J in xrange(element.dimension):
+                        self.ijv.add(gdof[I], gdof[J], k_loc[I,J])
+            except AttributeError as err:
+                log.error(err)
+
+    def _assign_boundary_conditions_to_mass_matrix(self):
+        ''' Assign boundary conditions to IJV matrix '''
+        alp = self.alp
+        ijv = self.ijv
+        lidx = len(self.nodes)*self.nodedim
+        for node in self.nodes:
+            for j in range(self.nodedim):
+                dof = self.nodedofs[j]
+                if node.hasbc(dof):
+                    ijv.add(node.gdof[j],lidx,alp)
+                    ijv.add(lidx,node.gdof[j],alp)
+                    lidx += 1
+        self.total_dimension = lidx # Total dimension of stiffness matrix
+
+    def assemble_mass_matrix(self):
+        ''' Assemble mass matrix '''
+        self._init_mass_matrix()
+        self._populate_mass_matrix()
+        self._assign_boundary_conditions_to_mass_matrix()
+        return self.ijv.tocoo()
+        
 
     def _init_force_vector(self):    
         ''' Initialize force vector '''
@@ -201,33 +236,10 @@ class Model(object):
     def _populate_R(self):    
         R = self.R
         for element in self.load_elements:
-#            if not hasattr(element, 'bc'):
-#                continue
-#            bc = element.bc
-#            element.qn = lambda k: bc['pressure']
-#            element.qt = lambda k: bc['shear']
             fq = element.force_vector
             gdof = array([node.gdof for node in element.nodes]).flatten()
             for I in xrange(element.dimension):
                 R[gdof[I]] += fq[I]
-
-#    def _assign_boundary_conditions_to_force_vector(self):
-#        lidx = len(self.nodes)*self.nodedim
-#        R = self.R
-#        alp = self.alp
-#        for node in self.nodes:
-#            if hasattr(node, 'bc'):
-#                if node.bc.has_key('fx'):
-#                    R[node.gdof[0]] += node.bc['fx']
-#                if node.bc.has_key('fy'):
-#                    R[node.gdof[1]] += node.bc['fy']
-#                if node.bc.has_key('dx'):
-#                    R[lidx] = node.bc['dx']*alp
-#                    lidx += 1
-#                if node.bc.has_key('dy'):
-#                    R[lidx] = node.bc['dy']*alp
-#                    lidx += 1
-#        return R
 
     def _assign_boundary_conditions_to_force_vector(self):
         lidx = len(self.nodes)*self.nodedim
@@ -258,7 +270,35 @@ class Model(object):
         R = self.assemble_force_vector()
         log.info("Solving")
         U = teefem.common.solve(K,R)
+        if kwds.get('export_matrices',False):
+            np.savetxt('K.txt', K.todense(), fmt='%+05.2E')
+            np.savetxt('R.txt', R, fmt='%+05.2E')
+            np.savetxt('U.txt', U, fmt='%+05.2E')        
         log.info("Updating fields")
         # log.debug(U)
         for element in self.elements:
             element.update(U)
+
+    def modal_solve(self, **kwds):
+        ''' Modal analysis '''
+        log.info("Creating stiffness matrix")
+        K = self.assemble_stiffness_matrix().tocsr()
+        log.info("Creating mass matrix")
+        M = self.assemble_mass_matrix().tocsr()
+        n = kwds.get('modes', 5) # Ominaismuotojen määrä
+
+        if kwds.get('export_matrices',False):
+            np.savetxt('K.txt', K.todense(), fmt='%+05.2E')
+            np.savetxt('M.txt', M.todense(), fmt='%+05.2E')
+
+        log.info("Solving")
+        w,v = scipy.sparse.linalg.eigs(K, k=n, M=M)
+        
+        print np.sqrt(w)
+
+#        U = teefem.common.solve(K,R)
+#
+#        log.info("Updating fields")
+#        # log.debug(U)
+#        for element in self.elements:
+#            element.update(U)
