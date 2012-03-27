@@ -41,7 +41,7 @@ def unitcircle(R=1,lc=1,meshtype='Tria3'):
     
     '''
     
-    meshfile = teefem.os.path.join(teefem.datadir, 'tria3.mail') # Linear triangle mesh file
+    meshfile = teefem.os.path.join(teefem.datadir, 'unitcircle_tria3_3000.msh') # Linear triangle mesh file
     mesh = teefem.geom.mesh(filename = meshfile)
     return mesh
 

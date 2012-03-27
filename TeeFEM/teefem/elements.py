@@ -50,6 +50,7 @@ class Element(object):
     def update(self, U):
         u = zeros(self.dimension)
         nodedim = len(self.degrees_of_freedom)
+        # Tämä kierrätetään ihan turhaan elementin kautta
         for i in xrange(len(self.nodes)):
             node = self.nodes[i]
             node.update_field(
@@ -60,6 +61,9 @@ class Element(object):
             for j in xrange(nodedim):
                 u[i*nodedim+j] = U[node.gdof[j]]
         self.u = matrix(u).T
+
+    def update_modal(valsy, vecsy):
+        pass
 
     @property
     def status(self):

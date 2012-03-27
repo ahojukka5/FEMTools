@@ -138,20 +138,31 @@ class MEMTR3(teefem.elements.Element2D):
         F = zeros(self.dimension)
         F[0::1] = np.sum(b,axis=0)
         return matrix(F).T
-        
+
 #    def update(self, U):
-#        ''' '''
 #        u = zeros(self.dimension)
+#        nodedim = len(self.degrees_of_freedom)
 #        for i in xrange(len(self.nodes)):
 #            node = self.nodes[i]
 #            node.update_field(
 #                field = 'DEPL', 
 #                params = self.degrees_of_freedom, 
-#                values = (U[node.gdof[0]],))
-#            for j in xrange(3):
-#                u[i*3+j] = U[node.gdof[j]]
+#                values = [U[node.gdof[j]] for j in xrange(nodedim)]
+#                )
+#            for j in xrange(nodedim):
+#                u[i*nodedim+j] = U[node.gdof[j]]
 #        self.u = matrix(u).T
-
+        
+#    def update_modal(self,valsy,vecsy):
+#        ''' Pikaliima '''
+#        for i in range(len(self.nodes)):
+#            node = self.nodes[i]
+#            dof = node[gdof[0]]
+#            field = {'DZ': vecsy[dof]}
+#            node.update_field(
+#                field = valsy
+#                )
+#        
 
 ###############################################################################
 
@@ -192,6 +203,32 @@ class Membrane(Model):
             z3 = e.nodes[2].z + e.nodes[2].fields['DEPL']['DZ']
             ax.plot([x1,x2,x3,x1],[y1,y2,y3,y1],[z1,z2,z3,z1],'--ko')
         return fig,ax
+
+    
+    def plot_modal(self, **kwds):
+        shapeidx = kwds.get('shapeidx',0)
+        import matplotlib.pylab as plt
+        from mpl_toolkits.mplot3d import Axes3D
+        fig = plt.figure()
+        ax = fig.gca(projection = '3d')
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_zlabel('z')
+        ax.grid()
+
+        for e in self.elements:
+            x1 = e.nodes[0].x
+            y1 = e.nodes[0].y
+            z1 = e.nodes[0].z + e.nodes[0].modalvecs[shapeidx]
+            x2 = e.nodes[1].x
+            y2 = e.nodes[1].y
+            z2 = e.nodes[1].z + e.nodes[1].modalvecs[shapeidx]
+            x3 = e.nodes[2].x
+            y3 = e.nodes[2].y
+            z3 = e.nodes[2].z + e.nodes[2].modalvecs[shapeidx]
+            ax.plot([x1,x2,x3,x1],[y1,y2,y3,y1],[z1,z2,z3,z1],'--ko')
+        return fig,ax
+        
         
 membrane = Membrane
 
@@ -248,10 +285,10 @@ def test2():
     ''' Kalvo-ongelma testi, yksikkökalvon ominaismuodot ja taajuudet '''
 
     # Lähtötiedot
-    m = 1
-    T = 10
-    a = 1
-    b = 1
+    m = 4
+    T = 200
+    a = np.pi
+    b = np.pi
 
     mesh = teefem.mesh.unitsquare()
     
@@ -259,16 +296,19 @@ def test2():
     
     # Kaikki reunat kiinni
     nset1 = set().union(mdl.nset['GA1'], mdl.nset['GA2'], mdl.nset['GA3'], mdl.nset['GA4'])
+    print("len nset1: {0}".format(len(nset1)))
     teefem.assign_bc(
         nodes = nset1, 
         bc = teefem.dirichlet_bc(encastre = True)
         )
 
     # Esijännitys
-    car = memchar(Tx = lambda k,e: T, m = lambda k,e: m)
+    Tf = lambda k,e: T
+    car = memchar(Tx = Tf, Ty = Tf, m = lambda k,e: m)
     teefem.assign_char(elements = mdl.elements, char = car)
 
-    mdl.modal_solve(export_matrices = True)
+    mdl.modal_solve(n_modes = 3, export_matrices = False)
+    mdl.plot_modal(shapeidx = 0)
 
     # Tarkka ratkaisu
     w = lambda i,j: np.sqrt(T/m)*np.sqrt((i*np.pi/a)**2 + (j*np.pi/b)**2)
@@ -277,6 +317,10 @@ def test2():
     for i in X:
         for j in X:
             print("i: {0}  j: {1}  w: {2}".format(i,j,w(i,j)))
+
+    import matplotlib.pyplot as plt
+    plt.show()
+
 #    
 #    dz = [node.fields['DEPL']['DZ'] for node in mdl.nodes]
 #    dymin = min(dz)

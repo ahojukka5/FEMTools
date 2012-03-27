@@ -37,7 +37,11 @@ class MEBODKT(teefem.elements.Element1D):
     ''' SEG2 element in DKT formulation '''
     def __init__(self, *args, **kwds):
         self.dimension = 2*3
+        self.has_stiffness = False
+        self.has_geometric_stiffness = False
         super(MEBODKT, self).__init__(*args, **kwds)
+    def update(self, U):
+        pass
 
 ###############################################################################
 
@@ -49,6 +53,8 @@ class MEDKTR3(teefem.elements.Element2D):
         super(MEDKTR3, self).__init__(*args, **kwds)
         
         self.boundary_conditions = set()
+        self.has_stiffness = True
+        self.has_geometric_stiffness = True
         
         self.dimension = 3*3
         self.degrees_of_freedom = ('DZ','DRX','DRY')
@@ -130,6 +136,11 @@ class MEDKTR3(teefem.elements.Element2D):
         self.Bx = lambda k,e: np.sum(self.Hx(k,e)*self.U)
         self.By = lambda k,e: np.sum(self.Hy(k,e)*self.U)
 
+        self.dNdk = self.geom.dNdk
+        self.dNde = self.geom.dNde
+        self.dNxy = lambda *ke: self.geom.invJ(*ke) * matrix([self.dNdk(*ke),self.dNde(*ke)])
+        self.Nxy = self.geom.N
+
     def assign_material(self, mat):
         self.material = mat
 #        log.debug("Material assigned. E: {0}".format(self.material.E))
@@ -139,37 +150,66 @@ class MEDKTR3(teefem.elements.Element2D):
             self.pressure = bc.pressure
 
     def assign_char(self, char):
-        if char.__class__ is PlateCharacteristic:
-            self.thickness = char.thickness
+        self.char = char
 
-    @property
-    def U(self):
-        return array([[
-            n.fields['DEPL']['DZ'], 
-            n.fields['DEPL']['DRX'], 
-            n.fields['DEPL']['DRY']] for n in self.geom.nodes]).flatten()
+
+    #### Lommahdusfunktioita ####
     
-    def w(self,k,e):
-        ''' Jostakin löytyi tämmöset muofofunktioit joilla voisi yrittää
-        interpoloida siirtymäkenttää elementin alueella. '''
-        U = self.U
-        la = 1-k-e
-        N1 = 3*la**2 - 2*la**3 + 2*k*e*la
-        N2 = la**2*k + k*e*la/2
-        N3 = la**2*e + k*e*la/2
-        N4 = 3*k**2 - 2*k**3 + 2*k*e*la
-        N5 = k**2*(k-1) - k*e*la
-        N6 = k**2*e + k*e*la/2
-        N7 = 3*e**2 - 2*e**3 + 2*k*e*la
-        N8 = e**2*k + k*e*la/2
-        N9 = e**2*(e-1) - k*e*la
-        N = array([N1,N2,N3,N4,N5,N6,N7,N8,N9])
-        return np.sum(N*U)
+    @cache
+    def Bg(self,*ke):
+        ''' Kinemaattinen matriisi (kalvo) '''
+        dNxy = self.dNxy(*ke)
+        dNdx = dNxy[0]
+        dNdy = dNxy[1]
+        Bg = matrix(zeros((2,self.dimension)))
+        Bg[0,0::3] = dNdx
+        Bg[1,0::3] = dNdy
+        return Bg
+
+    @cache
+    def T(self, *ke):
+        ''' "Kalvovoimamatriisi" '''
+        Tx = self.char.Tx(*ke)
+        Ty = self.char.Ty(*ke)
+        Txy = self.char.Txy(*ke)
+        return matrix([[Tx,Txy],[Txy,Ty]])
 
     @property
-    @cache
-    def detJ(self):
-        return self.geom.detJ
+    def geometric_stiffness_matrix(self):
+        ''' Geometric stiffness matrix S '''
+        Kg = matrix(zeros((self.dimension,self.dimension)))
+        for (W,ke) in zip(self.iweights, self.ipoints):
+            detJ = self.detJ(*ke)
+            Bg = self.Bg(*ke)
+            T = self.T(*ke)
+            Kg += W*Bg.T*T*Bg*detJ
+        return Kg
+    
+    ################################
+
+#    @property
+#    def U(self):
+#        return array([[
+#            n.fields['DEPL']['DZ'], 
+#            n.fields['DEPL']['DRX'], 
+#            n.fields['DEPL']['DRY']] for n in self.geom.nodes]).flatten()
+    
+#    def w(self,k,e):
+#        ''' Jostakin löytyi tämmöset muofofunktioit joilla voisi yrittää
+#        interpoloida siirtymäkenttää elementin alueella. '''
+#        U = self.U
+#        la = 1-k-e
+#        N1 = 3*la**2 - 2*la**3 + 2*k*e*la
+#        N2 = la**2*k + k*e*la/2
+#        N3 = la**2*e + k*e*la/2
+#        N4 = 3*k**2 - 2*k**3 + 2*k*e*la
+#        N5 = k**2*(k-1) - k*e*la
+#        N6 = k**2*e + k*e*la/2
+#        N7 = 3*e**2 - 2*e**3 + 2*k*e*la
+#        N8 = e**2*k + k*e*la/2
+#        N9 = e**2*(e-1) - k*e*la
+#        N = array([N1,N2,N3,N4,N5,N6,N7,N8,N9])
+#        return np.sum(N*U)
 
     @cache
     def B(self,*ke):
@@ -266,7 +306,7 @@ class MEDKTR3(teefem.elements.Element2D):
             log.error('Element groups: {0}'.format(self.groups))
         E = material.E
         nu = material.nu
-        t = self.thickness(*ke)
+        t = self.char.thickness(*ke)
         return E*t**3/(12*(1-nu**2)) * matrix([[1,nu,0],[nu,1,0],[0,0,0.5*(1-nu)]])
 
     @property
@@ -288,70 +328,70 @@ class MEDKTR3(teefem.elements.Element2D):
         F[0::3] = np.sum(b,axis=0)
         return matrix(F).T
 
-    def plot(self, **kwds):
-        ''' Plot geometry with mplot3d '''
-        import matplotlib.pylab as plt
-        from mpl_toolkits.mplot3d import Axes3D
-        fig = plt.figure()
-        ax = fig.gca(projection = '3d')
-        ax.set_xlabel('x')
-        ax.set_ylabel('y')
-        ax.set_zlabel('z')
-        ax.grid()
-        cn = self.geom.corner_nodes
-        k = concatenate([linspace(cn[cni][0],cn[(cni+1)%len(cn)][0]) for cni in xrange(len(cn))])
-        e = concatenate([linspace(cn[cni][1],cn[(cni+1)%len(cn)][1]) for cni in xrange(len(cn))])
-        w = np.vectorize(self.w)
-        ax.plot(self.geom.x(k,e),self.geom.y(k,e),self.geom.z(k,e)+w(k,e))
-        ax.scatter(self.geom.xcoords,self.geom.ycoords,self.geom.zcoords,marker='o',c='b',s=10)
-        for (xi,yi,zi,i) in zip(self.geom.xcoords,self.geom.ycoords,self.geom.zcoords,range(len(self.geom.xcoords))):
-            label = '%d'%(i+1)
-            ax.text(xi,yi,zi,label)
-        if kwds.has_key('filename'):
-            plt.savefig(**kwds)
-        return fig,ax    
-
-    def plot2(self, **kwds):
-        ''' Plot geometry with mplot3d '''
-        import matplotlib.pylab as plt
-        from mpl_toolkits.mplot3d import Axes3D
-        fig = plt.figure()
-        ax = fig.gca(projection = '3d')
-        ax.set_xlabel('x')
-        ax.set_ylabel('y')
-        ax.set_zlabel('z')
-        ax.grid()
-
-        X = np.linspace(0,1,25)
-        Xran = range(len(X))
-        w = lambda k,e: 0*k*np.sin(e)
-        data = np.array([(X[i],X[j],self.w(X[i],X[j])) for j in Xran for i in Xran[0:len(X)-j]])
-        tr = tri.Triangulation(data[:,0], data[:,1])
-        for edge in tr.edges:
-            idx1 = edge[0]
-            idx2 = edge[1]
-            x1 = data[idx1,0]
-            y1 = data[idx1,1]
-            z1 = data[idx1,2]
-            x2 = data[idx2,0]
-            y2 = data[idx2,1]
-            z2 = data[idx2,2]
-            ax.plot([x1,x2],[y1,y2],[z1,z2], 'b')
-        return fig,ax    
+#    def plot(self, **kwds):
+#        ''' Plot geometry with mplot3d '''
+#        import matplotlib.pylab as plt
+#        from mpl_toolkits.mplot3d import Axes3D
+#        fig = plt.figure()
+#        ax = fig.gca(projection = '3d')
+#        ax.set_xlabel('x')
+#        ax.set_ylabel('y')
+#        ax.set_zlabel('z')
+#        ax.grid()
+#        cn = self.geom.corner_nodes
+#        k = concatenate([linspace(cn[cni][0],cn[(cni+1)%len(cn)][0]) for cni in xrange(len(cn))])
+#        e = concatenate([linspace(cn[cni][1],cn[(cni+1)%len(cn)][1]) for cni in xrange(len(cn))])
+#        w = np.vectorize(self.w)
+#        ax.plot(self.geom.x(k,e),self.geom.y(k,e),self.geom.z(k,e)+w(k,e))
+#        ax.scatter(self.geom.xcoords,self.geom.ycoords,self.geom.zcoords,marker='o',c='b',s=10)
+#        for (xi,yi,zi,i) in zip(self.geom.xcoords,self.geom.ycoords,self.geom.zcoords,range(len(self.geom.xcoords))):
+#            label = '%d'%(i+1)
+#            ax.text(xi,yi,zi,label)
+#        if kwds.has_key('filename'):
+#            plt.savefig(**kwds)
+#        return fig,ax    
+#
+#    def plot2(self, **kwds):
+#        ''' Plot geometry with mplot3d '''
+#        import matplotlib.pylab as plt
+#        from mpl_toolkits.mplot3d import Axes3D
+#        fig = plt.figure()
+#        ax = fig.gca(projection = '3d')
+#        ax.set_xlabel('x')
+#        ax.set_ylabel('y')
+#        ax.set_zlabel('z')
+#        ax.grid()
+#
+#        X = np.linspace(0,1,25)
+#        Xran = range(len(X))
+#        w = lambda k,e: 0*k*np.sin(e)
+#        data = np.array([(X[i],X[j],self.w(X[i],X[j])) for j in Xran for i in Xran[0:len(X)-j]])
+#        tr = tri.Triangulation(data[:,0], data[:,1])
+#        for edge in tr.edges:
+#            idx1 = edge[0]
+#            idx2 = edge[1]
+#            x1 = data[idx1,0]
+#            y1 = data[idx1,1]
+#            z1 = data[idx1,2]
+#            x2 = data[idx2,0]
+#            y2 = data[idx2,1]
+#            z2 = data[idx2,2]
+#            ax.plot([x1,x2],[y1,y2],[z1,z2], 'b')
+#        return fig,ax    
         
-    def update(self, U):
-        ''' '''
-        u = zeros(self.dimension)
-#        print("dim: {0}".format(u.shape))
-        for i in xrange(len(self.nodes)):
-            node = self.nodes[i]
-            node.update_field(
-                field = 'DEPL', 
-                params = self.degrees_of_freedom, 
-                values = (U[node.gdof[0]], U[node.gdof[1]], U[node.gdof[2]]))
-            for j in xrange(3):
-                u[i*3+j] = U[node.gdof[j]]
-        self.u = matrix(u).T
+#    def update(self, U):
+#        ''' '''
+#        u = zeros(self.dimension)
+##        print("dim: {0}".format(u.shape))
+#        for i in xrange(len(self.nodes)):
+#            node = self.nodes[i]
+#            node.update_field(
+#                field = 'DEPL', 
+#                params = self.degrees_of_freedom, 
+#                values = (U[node.gdof[0]], U[node.gdof[1]], U[node.gdof[2]]))
+#            for j in xrange(3):
+#                u[i*3+j] = U[node.gdof[j]]
+#        self.u = matrix(u).T
 
     @cache
     def M(self,*ke):
@@ -363,7 +403,7 @@ class MEDKTR3(teefem.elements.Element2D):
     @cache
     def S(self, *ke):
         ''' Jännitys pisteessä (k,e) '''
-        return 6/self.thickness(*ke)**2*self.M(*ke)
+        return 6/self.char.thickness(*ke)**2*self.M(*ke)
 
     @cache
     def vmis(self, *ke):
@@ -401,14 +441,6 @@ class DKT(Model):
         ax.set_ylabel('y')
         ax.set_zlabel('z')
         ax.grid()
-#        x = []
-#        y = []
-#        z = []
-#        for n in self.nodes:
-#            x.append(n.x)
-#            y.append(n.y)
-#            z.append(n.z+n.fields['DEPL']['DZ'])
-#        ax.scatter(x,y,z,marker='o',c='b',s=10)
         for e in self.stiff_elements:
             x1 = e.nodes[0].x
             y1 = e.nodes[0].y
@@ -421,7 +453,31 @@ class DKT(Model):
             z3 = e.nodes[2].z + e.nodes[2].fields['DEPL']['DZ']
             ax.plot([x1,x2,x3,x1],[y1,y2,y3,y1],[z1,z2,z3,z1],'--ko')
         return fig,ax
-        
+
+    def plot_buckling(self, **kwds):
+        shapeidx = kwds.get('shapeidx',0)
+        import matplotlib.pylab as plt
+        from mpl_toolkits.mplot3d import Axes3D
+        fig = plt.figure()
+        ax = fig.gca(projection = '3d')
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_zlabel('z')
+        ax.grid()
+
+        for e in self.stiff_elements:
+            x1 = e.nodes[0].x
+            y1 = e.nodes[0].y
+            z1 = e.nodes[0].z + e.nodes[0].bucklingvecs[shapeidx]
+            x2 = e.nodes[1].x
+            y2 = e.nodes[1].y
+            z2 = e.nodes[1].z + e.nodes[1].bucklingvecs[shapeidx]
+            x3 = e.nodes[2].x
+            y3 = e.nodes[2].y
+            z3 = e.nodes[2].z + e.nodes[2].bucklingvecs[shapeidx]
+            ax.plot([x1,x2,x3,x1],[y1,y2,y3,y1],[z1,z2,z3,z1],'--ko')
+        return fig,ax
+
 dkt = DKT
 
 ###############################################################################
@@ -581,10 +637,7 @@ def rotsy():
     print("vmis: {0}".format(Vmis))
 
 def ex2():
-    
     ''' DKT esimerkki 1, pyörähdyssymmetrinen laatta jakautuneella kuormalla '''
-    
-    
     t = 25e-3
     E = 100e9
     nu = 0.3
@@ -626,7 +679,62 @@ def ex2():
     plotmdl(mdl, vmis)
     plt.show()
 
+def test3():
+    ''' DKT testi 3, suorakaidelaatan lommahdus '''
+    t = 10e-3
+    E = 210e9
+    nu = 0.3
+    a = 1
+    b = 1
+
+    mesh = teefem.mesh.unitsquare()
+    mat = teefem.materials.elastic(E = E, nu = nu)
+    mdl = DKT(mesh = mesh)
+    
+    OM_el = mdl.elset['OM1']
+
+    teefem.assign_material(elements = OM_el, material = mat)
+    
+    nset1 = set().union(mdl.nset['GA1'], mdl.nset['GA2'], mdl.nset['GA3'], mdl.nset['GA4'])
+    teefem.assign_bc(
+        nodes = nset1, 
+        bc = teefem.dirichlet_bc(dz = 0),
+        )
+
+    carel = teefem.plate_functions.platechar(
+        thickness = lambda k,e: t,
+        Tx = lambda k,e: 1e6,
+        )
+    teefem.assign_char(elements = OM_el, char = carel)
+
+    mdl.buckling_solve(n_modes = 10)
+    for i in range(4):
+        mdl.plot_buckling(shapeidx = i)
+    
+    import matplotlib.pylab as plt
+    plt.show()
+
+    # Tarkka ratkaisu
+    D = E*t**3/(12*(1-nu**2))
+    la = lambda m,n: np.pi**2*D/b**2*(m/(a/b) + n**2/m*(a/b))**2
+    print("Acc")
+    r = range(1,5)
+    d = np.array([[la(i,j) for i in r] for j in r])
+    print d/1e6
+    
+#    dymin = min([node.fields['DEPL']['DZ'] for node in mdl.nodes])
+#    
+#    print("DZ (acc)  : %0.14E"%(-w(0)))
+#    print("DZ        : %0.14E"%(dymin))
+#    print("DZ (CA)   : %0.14E"%(-1.74644966293971E-01))
+    
+#    import matplotlib.pylab as plt
+#    mdl.plot()
+#    plotmdl(mdl, vmis)
+#    plt.show()
+
 if __name__ == '__main__':
     #ex1()
-    ex2()
+    #ex2()
     #rotsy()
+    test3()

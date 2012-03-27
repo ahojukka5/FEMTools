@@ -19,6 +19,7 @@ class PlaneStressElement1D(teefem.elements.Element1D):
     
     def __init__(self, *args, **kwds):
         super(PlaneStressElement1D, self).__init__(*args, **kwds)
+        self.degrees_of_freedom = ('DX','DY')
         self.pressure = lambda k: 0
 
     def assign_boundary_condition(self, bc):
@@ -33,8 +34,10 @@ class PlaneStressElement1D(teefem.elements.Element1D):
         Rq = zeros(self.dimension)
         qx = array([W * self.pressure(k) * N(k) * Jk(k) for (W,k) in zip(self.iweights,self.ipoints)])
         qy = array([W * self.pressure(k) * N(k) * Je(k) for (W,k) in zip(self.iweights,self.ipoints)])
-        Rq[1::2] += np.sum(qy,axis=0)
-        Rq[0::2] += np.sum(qx,axis=0)
+        # hätäkorjaus
+        Rq[0::2] += np.sum(qy,axis=0)
+        Rq[1::2] += np.sum(qx,axis=0)
+#        print Rq
         return Rq
 
 class MEPLSE2(PlaneStressElement1D):
@@ -68,6 +71,7 @@ class PlaneStressElement2D(teefem.elements.Element2D):
     def __init__(self, *args, **kwds):
         super(PlaneStressElement2D, self).__init__(*args, **kwds)
         self.dimension = len(self.geom.nodes)*2 # (dx,dy)
+        self.degrees_of_freedom = ('DX','DY')
         self.has_stiffness = True
         self.dNdk = self.geom.dNdk
         self.dNde = self.geom.dNde

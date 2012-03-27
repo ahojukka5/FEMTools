@@ -3,6 +3,10 @@ include LICENSE
 include INSTALL
 include CHANGES
 recursive-include examples *.py
+recursive-include examples *.pdf
+recursive-include examples *.geo
+recursive-include examples *.msh
+recursive-include teefem/output *.mpg
 graft doc/html
 graft teefem/data
 include doc/TeeFEM-TeekkariFEM.pdf
