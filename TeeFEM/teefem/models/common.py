@@ -75,22 +75,22 @@ class Model(object):
     @property
     @cache
     def stiff_elements(self):
-        return set([element for element in self.elements if hasattr(element, 'stiffness_matrix')])# or element.has_stiffness])
+        return set([element for element in self.elements if element.has_stiffness_matrix])
 
     @property
     @cache
     def geometric_stiff_elements(self):
-        return set([element for element in self.elements if hasattr(element, 'geometric_stiffness_matrix') or element.has_geometric_stiffness])
+        return set([element for element in self.elements if element.has_geometric_stiffness_matrix])
 
     @property
     @cache
     def load_elements(self):
-        return set([element for element in self.elements if hasattr(element, 'force_vector')])
+        return set([element for element in self.elements if element.has_load_vector])
 
     @property
     @cache
     def mass_elements(self):
-        return set([element for element in self.elements if hasattr(element, 'mass_matrix') or element.has_mass])
+        return set([element for element in self.elements if element.has_mass_matrix])
 
     def init(self):
         mapping = self.mapping
@@ -115,25 +115,43 @@ class Model(object):
     
     def create_node_groups(self):
         log.info('Creating node groups for model')
-        self.nset = {}
+        self._nset = {}
         for node in self.nodes:
             for ngroup in node.groups:
                 try:
-                    self.nset[ngroup].add(node)
+                    self._nset[ngroup].add(node)
                 except KeyError:
                     log.info('New node group: {0}'.format(ngroup))
-                    self.nset[ngroup] = set([node])
+                    self._nset[ngroup] = set([node])
     
     def create_element_groups(self):
         log.info('Creating element groups for model')
-        self.elset = {}
+        self._elset = {}
         for element in self.elements:
             for egroup in element.groups:
                 try:
-                    self.elset[egroup].add(element)
+                    self._elset[egroup].add(element)
                 except KeyError:
                     log.info('New element group: {0}'.format(egroup))
-                    self.elset[egroup] = set([element])
+                    self._elset[egroup] = set([element])
+
+    @cache
+    def nset(self,*args):
+        nset = set()
+        for seti in args:
+            nodes = self._nset[seti]
+            for node in nodes:
+                nset.add(node)
+        return nset
+
+    @cache
+    def elset(self,*args):
+        elset = set()
+        for sete in args:
+            elements = self._elset[sete]
+            for element in elements:
+                elset.add(element)
+        return elset
 
 #        for (k,v) in self.mesh.group_ma.iteritems():
 #            try: 
@@ -157,9 +175,9 @@ class Model(object):
             node.update_boundary_conditions()
             node.gdof = xrange(idx,idx+node.dim)
             idx += node.dim
-        self.ijv = teefem.common.IJV()
+        return teefem.common.IJV()
 
-    def _populate_stiffness_matrix(self):
+    def _populate_stiffness_matrix(self,ijv):
         ''' Populate IJV coordinate system '''
         for element in self.stiff_elements:
             try:
@@ -167,14 +185,14 @@ class Model(object):
                 gdof = array([node.gdof for node in element.nodes]).flatten()
                 for I in xrange(element.dimension):
                     for J in xrange(element.dimension):
-                        self.ijv.add(gdof[I], gdof[J], k_loc[I,J])
+                        ijv.add(gdof[I], gdof[J], k_loc[I,J])
             except AttributeError as err:
                 log.error(err)
+        return ijv
 
-    def _assign_lagrange_boundary_conditions_to_stiffness_matrix(self):
+    def _assign_lagrange_boundary_conditions_to_stiffness_matrix(self,ijv):
         ''' Assign boundary conditions to IJV matrix, Lagrange method '''
         alp = self.alp
-        ijv = self.ijv
         lidx = len(self.nodes)*self.nodedim
         for node in self.nodes:
             for j in range(self.nodedim):
@@ -184,6 +202,7 @@ class Model(object):
                     ijv.add(lidx,node.gdof[j],alp)
                     lidx += 1
         self.total_dimension = lidx # Total dimension of stiffness matrix
+        return ijv
 
     def _assign_penalty_boundary_conditions_to_stiffness_matrix(self):
         ''' Assign boundary conditions to IJV matrix, penalty method '''
@@ -201,13 +220,13 @@ class Model(object):
     def assemble_stiffness_matrix(self, **kwds):
         ''' Assemble stiffness matrix '''
         method = kwds.get('method','lagrange')
-        self._init_stiffness_matrix()
-        self._populate_stiffness_matrix()
+        ijv = self._init_stiffness_matrix()
+        ijv = self._populate_stiffness_matrix(ijv)
         if method == 'lagrange':
-            self._assign_lagrange_boundary_conditions_to_stiffness_matrix()
+            ijv = self._assign_lagrange_boundary_conditions_to_stiffness_matrix(ijv)
         if method == 'penalty':
-            self._assign_penalty_boundary_conditions_to_stiffness_matrix()
-        return self.ijv.tocoo()
+            ijv = self._assign_penalty_boundary_conditions_to_stiffness_matrix(ijv)
+        return ijv.tocoo()
 
 ###############################################################################
 
@@ -300,19 +319,18 @@ class Model(object):
 
     def _init_force_vector(self):    
         ''' Initialize force vector '''
-        self.R = zeros(self.total_dimension)
+        return zeros(self.total_dimension)
 
-    def _populate_R(self):    
-        R = self.R
+    def _populate_R(self, R):    
         for element in self.load_elements:
             fq = element.force_vector
             gdof = array([node.gdof for node in element.nodes]).flatten()
             for I in xrange(element.dimension):
                 R[gdof[I]] += fq[I]
+        return R
 
-    def _assign_lagrange_boundary_conditions_to_force_vector(self):
+    def _assign_lagrange_boundary_conditions_to_force_vector(self,R):
         lidx = len(self.nodes)*self.nodedim
-        R = self.R
         alp = self.alp
         for node in self.nodes:
             for j in range(self.nodedim):
@@ -328,13 +346,13 @@ class Model(object):
     def assemble_force_vector(self, **kwds):
         ''' Assemble force vector '''
         method = kwds.get('method','lagrange')
-        self._init_force_vector()
-        self._populate_R()
+        R = self._init_force_vector()
+        R = self._populate_R(R)
         if method == 'lagrange':
-            self._assign_lagrange_boundary_conditions_to_force_vector()
+            R = self._assign_lagrange_boundary_conditions_to_force_vector(R)
         if method == 'penalty':
-            self._assign_penalty_boundary_conditions_to_force_vector()
-        return self.R
+            R = self._assign_penalty_boundary_conditions_to_force_vector(R)
+        return R
 
 ###############################################################################
 
@@ -350,7 +368,6 @@ class Model(object):
             np.savetxt('R.txt', R, fmt='%+05.2E')
             np.savetxt('U.txt', U, fmt='%+05.2E')        
         log.info("Updating fields")
-        # log.debug(U)
         for element in self.elements:
             element.update(U)
 

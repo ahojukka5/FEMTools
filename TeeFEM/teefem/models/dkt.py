@@ -15,12 +15,11 @@ from __future__ import division
 import teefem
 import teefem.elements
 from teefem.boundary_conditions import PressureBoundaryCondition
-from teefem.plate_functions import PlateCharacteristic
+from teefem.plate_functions import PlateCharacteristic as platechar
 from common import Model
 from teefem import log, cache
 
-#from scipy.sparse.linalg import spsolve
-from numpy import array, zeros, concatenate, linspace, matrix
+from numpy import array, zeros, matrix
 from numpy import sqrt
 import numpy as np
 #import matplotlib.tri as tri
@@ -33,12 +32,38 @@ def checkmatrix(A):
     for i in range(s[0]):
         print("Sum col {0}: {1}".format(i+1, np.sum(A[i,:])))
 
+###############################################################################
+
+class PlateStructuralOrthotropic(object):
+    ''' Structural orthotropic material model '''
+    def __init__(self, **kwds):
+        self.type = 'platestructuralorthotropic'
+        basematerial = kwds.get('basematerial')
+        E = basematerial.E
+        G = basematerial.G
+        b = kwds.get('b') # Jäykisteen leveys
+        B = kwds.get('B') # Jäykistejako
+        t = kwds.get('t') # Laatan paksuus
+        T = kwds.get('T') # Laatan paksuus jäykisteen kohdalta
+        Ix = 1.12/3.0 * (t**3*B + b**3*(T-t))
+        Iy = B*t**3/12 + b*(T-t)**3/12 + b*(T-t)*(t/2+(T-t)/2)**2
+        self.kx = E*Iy/B
+        self.ky = E*t**3/(12*(1-b/B+b*t**3/(B*T**3)))
+        self.kxy = 0
+        self.kyx = 0
+        self.ks = G*Ix*t**3/12 + G*Ix/(2*B)
+
+plate_structural_orthotropic = PlateStructuralOrthotropic
+###############################################################################
+
 class MEBODKT(teefem.elements.Element1D):
     ''' SEG2 element in DKT formulation '''
     def __init__(self, *args, **kwds):
         self.dimension = 2*3
-        self.has_stiffness = False
-        self.has_geometric_stiffness = False
+        self.has_stiffness_matrix = False
+        self.has_geometric_stiffness_matrix = False
+        self.has_load_vector = False
+        self.has_mass_matrix = False
         super(MEBODKT, self).__init__(*args, **kwds)
     def update(self, U):
         pass
@@ -53,8 +78,10 @@ class MEDKTR3(teefem.elements.Element2D):
         super(MEDKTR3, self).__init__(*args, **kwds)
         
         self.boundary_conditions = set()
-        self.has_stiffness = True
-        self.has_geometric_stiffness = True
+        self.has_stiffness_matrix = True
+        self.has_geometric_stiffness_matrix = True
+        self.has_load_vector = True
+        self.has_mass_matrix = False
         
         self.dimension = 3*3
         self.degrees_of_freedom = ('DZ','DRX','DRY')
@@ -299,25 +326,40 @@ class MEDKTR3(teefem.elements.Element2D):
 
     @cache
     def D(self, *ke):
-        try:
-            material = self.material
-        except AttributeError as err:
-            log.error(err)
-            log.error('Element groups: {0}'.format(self.groups))
-        E = material.E
-        nu = material.nu
+        material = self.material
         t = self.char.thickness(*ke)
-        return E*t**3/(12*(1-nu**2)) * matrix([[1,nu,0],[nu,1,0],[0,0,0.5*(1-nu)]])
+        if material.type == 'isotropic':
+            E = material.E
+            nu = material.nu
+            k = E*t**3/(12*(1-nu**2))
+            return k * matrix([[1,nu,0],[nu,1,0],[0,0,0.5*(1-nu)]])
+        if material.type == 'orthotropic':
+            kx = material.Ex*t**3/(12*(1-material.nux*material.nuy))
+            ky = material.Ey*t**3/(12*(1-material.nux*material.nuy))
+            kxy = material.nuy*kx
+            kyx = material.nux*ky
+            ks = material.G*t**3/12
+            return matrix([[kx,kxy,0],[kyx,ky,0],[0,0,2*ks]])
+        if material.type == 'platestructuralorthotropic':
+            m = material
+            return matrix([[m.kx,m.kxy,0],[m.kyx,m.ky,0],[0,0,2*m.ks]])
+        return None
 
     @property
     def stiffness_matrix(self):
         ''' Stiffness matrix '''
         K = matrix(zeros((self.dimension,self.dimension)))
+        c = self.char.c
         for (W,ke) in zip(self.iweights, self.ipoints):
             detJ = self.detJ(*ke)
             B = self.B(*ke)
             D = self.D(*ke)
             K += W*B.T*D*B*detJ
+            if c != 0: # Alustakerroin?:
+                N = zeros(self.dimension)
+                N[0::3] = self.Nxy(*ke)
+                N = matrix(N)
+                K += W*N.T*c*N*detJ
         return K
 
     @property

@@ -2,8 +2,19 @@
 
 from __future__ import division
 
-import meta
+__all__ = [
+    'division',
+    'mesh',
+    'assign_material',
+    'assign_bc',
+    'assign_char',
+    'pressure_bc',
+    'dirichlet_bc',
+    'materials',
+    ]
+    
 
+from meta import *
 
 import os
 basedir = os.path.dirname(__file__)
@@ -22,7 +33,7 @@ from plate_functions import *
 #from scipy.sparse.linalg import spsolve as solve
 #
 import common
-import mesh
+import meshlib
 #import geom
 #import models
 #import materials

@@ -14,5 +14,6 @@ class PlateCharacteristic(object):
         self.Ty = kwds.get('Ty', lambda k,e: 0)
         self.Txy = kwds.get('Txy', lambda k,e: 0)
         self.m = kwds.get('m', lambda k,e: 0)
+        self.c = kwds.get('winkler_c', 0)
         
 platechar = PlateCharacteristic

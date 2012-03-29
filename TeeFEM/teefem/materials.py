@@ -9,8 +9,9 @@ Created on Sun Feb 12 16:45:50 2012
 ######################################
 """
 
+import numpy as np
 
-class Elastic(object):
+class ElasticIsotropic(object):
     """
     Linear elastic material model
     
@@ -31,8 +32,34 @@ class Elastic(object):
     
     """
     def __init__(self,*args,**kwds):
+        self.type = 'isotropic'
         self.E = kwds.get('E')
         self.nu = kwds.get('nu')
         self.G = self.E/(2*(1+self.nu))
 
-elastic = Elastic
+class ElasticOrthotropic(object):
+    """
+    Linear elastic material model
+    
+    INPUT:
+            
+    - ``E`` - Modulus of elasticity
+    - ``nu`` - Poisson's ratio
+        
+    OUTPUT:
+        
+    - Material object
+            
+    EXAMPLES:
+      
+    """
+    def __init__(self,*args,**kwds):
+        self.type = 'orthotropic'
+        self.Ex = kwds.get('Ex')
+        self.Ey = kwds.get('Ey')
+        self.nux = kwds.get('nux')
+        self.nuy = kwds.get('nuy')
+        self.G = np.sqrt(self.Ex*self.Ey)/(2*(1+np.sqrt(self.nux*self.nuy)))
+
+elastic = ElasticIsotropic
+elastic_orthotropic = ElasticOrthotropic

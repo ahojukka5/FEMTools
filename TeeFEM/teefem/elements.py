@@ -27,7 +27,10 @@ class Element(object):
         self.geom = kwds['geom']
         self.nodes = self.geom.nodes # Isoparametric
         self.groups = self.geom.groups
-#        self.has_stiffness = False
+#        self.has_stiffness_matrix = False
+#        self.has_mass_matrix = False
+#        self.has_load_vector = False
+#        self.has_geometric_stiffness_matrix = False
 #        self.material = self.geom.material
         
     @property
