@@ -16,17 +16,19 @@ def dprint(*args, **kwds):
         print args[0]
 
 class File(object):
+    fileid = 0
     def __init__(self):
-        pass
+        File.fileid += 1
+        self.id = File.fileid
 
 class Export(object):
     def __init__(self):
         self.actions = 'make_etude'
         self.debug = 'nodebug'
-        self.lang = 'EN'
+        self.lang = 'eng'
         self.mode = 'interactif'
         self.ncpus = 1 
-        self.version = 'testing'
+        self.version = 'STA11.1' # testing
         self.memjeveux = 512.0
         self.mem_aster = 256.0
         self.tpmax = 5*3600 # => 5 hours
@@ -36,7 +38,7 @@ class Export(object):
         self.scriptname = sys.argv[0]
         self.base = False
         self.basename = os.path.splitext(self.scriptname)[0]
-        self.files = {}
+        self.files = []
     @property
     def commfiles(self):
         return [file.name for file in self.files.values() if file.type == 'comm']
@@ -52,7 +54,7 @@ class Export(object):
         f.type = type if type else ext
         f.unite = unite
         f.opts = opts
-        self.files[unite] = f
+        self.files.append(f)
     def writetofile(self,fname=None):
         if fname:
             self.exportfile = os.path.join(self.scriptdir, fname)
@@ -69,7 +71,7 @@ class Export(object):
             fh.write('A memjeveux %s\n'%(int(self.memjeveux)))
             fh.write('A tpmax %s\n'%(int(self.tpmax)))
             fh.write('P memjob %s\n'%(int(self.memjob)))
-            for file in self.files.values():
+            for file in self.files:
                 p0 = 'R' if file.type == 'base' else 'F'
                 fh.write('%s %s %s %s %s\n'%(p0, file.type, file.name, file.opts, str(file.unite)))
         return self.exportfile
