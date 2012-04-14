@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
+"""
 
-# Rotsysolid
+Muutokset
+
+14.4.2012
+- Lisätty RotSolid __init__: has_stiffness_matrix , has_load_vector
+- Lisätty yksinkertainen piirtorutiini
+Jukka
+
+"""
 
 from __future__ import division
 
@@ -19,7 +27,8 @@ class RotSolid(teefem.elements.Element2D):
         super(RotSolid, self).__init__(*args, **kwds)
         self.dimension = len(self.geom.nodes)*2 # (dx,dy)
         self.degrees_of_freedom = ('DX','DY')
-        self.has_stiffness = True
+        self.has_stiffness_matrix = True
+        self.has_load_vector = False
         self.dNdk = self.geom.dNdk
         self.dNde = self.geom.dNde
         self.N = self.geom.N
@@ -89,7 +98,24 @@ class ROTSOL(Model):
         self.nodedim = len(self.nodedofs)
 
         self.init()
-    
+
+    def plot(self, **kwds):
+        ''' Plottaus. '''
+        import matplotlib.pylab as plt
+        fig = plt.figure()
+        ax = fig.gca()
+        ax.grid()
+        sf = kwds.get('scalefactor',1)
+        for e in self.stiff_elements:
+            x1 = e.nodes[0].x + e.nodes[0].fields['DEPL']['DX']*sf
+            y1 = e.nodes[0].y + e.nodes[0].fields['DEPL']['DY']*sf
+            x2 = e.nodes[1].x + e.nodes[1].fields['DEPL']['DX']*sf
+            y2 = e.nodes[1].y + e.nodes[1].fields['DEPL']['DY']*sf
+            x3 = e.nodes[2].x + e.nodes[2].fields['DEPL']['DX']*sf
+            y3 = e.nodes[2].y + e.nodes[2].fields['DEPL']['DY']*sf
+            ax.plot([x1,x2,x3,x1],[y1,y2,y3,y1],'--ko')
+        return fig,ax
+
 #logging.debug("Module {0} loaded.".format(__file__))
 
 ###############################################################################
