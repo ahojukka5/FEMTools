@@ -22,8 +22,10 @@ class RotSolid(teefem.elements.Element2D):
         self.has_stiffness = True
         self.dNdk = self.geom.dNdk
         self.dNde = self.geom.dNde
-        self.ipoints = [(1.0/3.0, 1.0/3.0)]
-        self.iweights = [(1.0/2.0)]    
+        self.N = self.geom.N
+        self.x = self.geom.x
+        self.ipoints = [[1.0/6.0, 1.0/6.0],[2.0/3.0, 1.0/6.0], [1.0/6.0, 2.0/3.0]]
+        self.iweights = [[1.0/3.0],[1.0/3.0],[1.0/3.0]]    
     
     @property
     def detJ(self):
@@ -31,32 +33,34 @@ class RotSolid(teefem.elements.Element2D):
 
     def assign_material(self, mat):
         self.material = mat
-
-    @teefem.cache    
+    
     def B(self,*ke):
         """
         Returns plane kinematic matrix B 
         """
         dNdk = self.dNdk(*ke)
         dNde = self.dNde(*ke)
+        N = self.N(*ke)
+        r = self.x(*ke)
         dNxy = self.invJ(*ke) * matrix([dNdk,dNde])
         dNdx = dNxy[0]
         dNdy = dNxy[1]
-        B = matrix(zeros((3,self.dimension)))
+        B = matrix(zeros((self.D(*ke).shape[0],self.dimension)))
         B[0,0::2] = dNdx
-        B[1,1::2] = dNdy
-        B[2,0::2] = dNdy
-        B[2,1::2] = dNdx
+        B[1,0::2] = N/r
+        B[2,1::2] = dNdy
+        B[3,0::2] = dNdy
+        B[3,1::2] = dNdx
         return B
 
-    @teefem.cache
+    #@teefem.cache
     def D(self,*ke):
         """
         Material matrix D
         """
         EE = self.material.E
         nu = self.material.nu
-        return EE/(1-nu**2)*matrix([[1,nu,0],[nu,1,0],[0,0,(1-nu)/2]])
+        return EE/((1+nu)*(1-2*nu))*matrix([[1-nu,nu,nu,0],[nu,1-nu, nu,0],[nu, nu, 1-nu, 0],[0,0,0,(1-2*nu)/2]])
 
     @property
 #    @teefem.cache
@@ -65,9 +69,10 @@ class RotSolid(teefem.elements.Element2D):
         K = matrix(zeros((self.dimension,self.dimension)))
         for (W,ke) in zip(self.iweights, self.ipoints):
             detJ = self.detJ(*ke)
+            r=self.x(*ke)
             B = self.B(*ke)
             D = self.D(*ke)
-            K += W*B.T*D*B*detJ
+            K += np.pi*W[0]*B.T*D*B*r*detJ
         return K
 
 class ROTSOL(Model):
@@ -78,7 +83,6 @@ class ROTSOL(Model):
         super(ROTSOL, self).__init__(*args, **kwds)
         self.mapping = {
             'Tria3': RotSolid,
-#            'Tria6': MECPTR6,
         }
         self.nodedofs = ('dx','dy')
         self.nodeloads = ('fx','fy')
@@ -86,7 +90,7 @@ class ROTSOL(Model):
 
         self.init()
     
-logging.debug("Module {0} loaded.".format(__file__))
+#logging.debug("Module {0} loaded.".format(__file__))
 
 ###############################################################################
 ###############################################################################
@@ -97,23 +101,20 @@ def test1():
     n2 = teefem.geom.Node(x=1, y=0, z=0)
     n3 = teefem.geom.Node(x=0, y=1, z=0)
     shape1 = teefem.geom.Tria3(nodes=(n1,n2,n3))
-    print shape1
-    print dir(shape1)
-    print shape1.nodes
-    print shape1.detJ(0.1,0.1)
-    print shape1.dNde(0.1,0.1)
+    #print shape1
+    #print dir(shape1)
+    #print shape1.nodes
+    #print shape1.detJ(0.1,0.1)
+    #print shape1.dNde(0.1,0.1)
+    #print shape1.x(0.1,0.1)
     element = RotSolid(geom = shape1)
-    print element
-    print dir(element)
-    print element.status
-    print element.B(0.1,0.1)
-    print element.iweights
-    print element.ipoints
-    
-    # Tarvitaan materiaalimäärittely jäykkyysmatriisia varten,
-    # kokeile commentata -> virheilmoitus
     element.material = teefem.materials.elastic(E=210e9, nu=0.3)
-
+    #print element
+    #print dir(element)
+    #print element.status
+    #print element.iweights
+    #print element.ipoints
+    #print element.has_stiffness
     print element.stiffness_matrix
     
     import matplotlib.pylab as plt
