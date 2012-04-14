@@ -4,7 +4,7 @@ L = 20;
 H = 10; 
 hx = 4;
 hy = 2;
-lc = 1;
+lc = 0.2;
 
 // Ulkomitat
 Point(1) = {0,0,0,lc};
