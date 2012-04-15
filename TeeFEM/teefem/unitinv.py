@@ -40,7 +40,7 @@ def unitinterval(x0=0,x1=1,numberofnodes=5,dense=0):
     return mesh
 
 def biasedspace(x0=0,x1=1,numberofnodes=5,dense=1):
-    ab0=np.linspace(0,np.log2(2**abs(dense))+1,numberofnodes)
+    ab0=np.linspace(0,abs(dense)+1,numberofnodes)
     if np.sign(dense)<>0:
         ab0=2**ab0-1
         ab0=ab0/max(ab0)
